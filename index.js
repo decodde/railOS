@@ -59,7 +59,7 @@ app.post("/deltrainschedule",function(req,res){
 
 
 
-app.listen(process.env.port||8090,function(){
+app.listen(process.env.PORT||8090,function(){
           console.log("_._._._🚂-[¤ ¤]-[¤ ¤ ¤]-[¤ ¤ ¤]-[¤ ¤ ¤]_._ ______ railOS server running ")
 }
 )
