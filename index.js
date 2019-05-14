@@ -23,6 +23,7 @@ app.get("/",function(req,res){
 
 app.post("/login",function(req,res){
 		console.log(req.body.username+"  "+req.body.password)
+        res.redirect("dspage")
 })
 
 app.post("/newtravel",function(req,res){
