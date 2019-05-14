@@ -1,14 +1,15 @@
 var express=require("express")
 var app=express()
 
-/*const MongoClient = require('mongodb').MongoClient;
+var db
+var users="users"
+
+const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb+srv://railosapp:<password>@cluster0-vkklb.mongodb.net/test?retryWrites=true";
 const client = new MongoClient(uri, { useNewUrlParser: true });
 client.connect(err => {
-  const collection = client.db("test").collection("devices");
-  // perform actions on the collection object
-  client.close();
-});*/
+  db= client.db("users")
+});
 
 app.use(require('body-parser')());
 
@@ -21,7 +22,7 @@ app.get("/",function(req,res){
 		res.render("main")
 })
 
-app.get("/dspage",function(req,res){
+app.get("/ds",function(req,res){
     res.render("dspage")
 })
 app.post("/login",function(req,res){

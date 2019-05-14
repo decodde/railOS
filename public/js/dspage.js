@@ -19,7 +19,9 @@ function show(x){
 	}
 }
 function getschedule(){
-	
+	$.get("/getschedule",function(response){
+        
+    })
 }
 function updschedule(){
 	
