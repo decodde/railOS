@@ -21,6 +21,9 @@ app.get("/",function(req,res){
 		res.render("main")
 })
 
+app.get("/dspage",function(req,res){
+    res.render("dspage")
+})
 app.post("/login",function(req,res){
 		console.log(req.body.username+"  "+req.body.password)
         res.redirect("dspage")
