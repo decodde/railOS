@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "description": "railOS online serverside api",
   "main": "index.js",
-  "start":"node index.js",
   "scripts": {
-    "start": "node index"
+    "start": "node index.js"
   },
   "author": "Fasina Oreoluwa",
   "license": "ISC",
