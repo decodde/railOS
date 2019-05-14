@@ -1,0 +1,37 @@
+html
+		head
+				meta(name="viewport"  content="width=device-width,initial-scale=1.0")
+				title railOS
+				link(rel="stylesheet",href="../css/bootstrap.min.css")
+				
+		body(style="padding:10px")
+			h2 railOS
+			br
+			div.card.center-block
+				div.btn-group-horizontal(style="padding:10px")
+					button.btn.btn-info#priceb(onclick="show(this.id)",style="margin-right:8px") Manage Pricing
+					button.btn.btn-info#scheduleb(onclick="show(this.id)") Manage Schedule
+				
+			div.card
+				div#pricepane(style="visiblity:visible;display:block")
+					table.table.pricetable.table-responsive
+						thead.thead-light
+							tr
+								th(scope="col") From\To
+								th(scope="col") LG
+								th(scope="col") KL
+								th(scope="col") GB
+								th(scope="col") LG
+								th(scope="col") KL
+								th(scope="col") GB
+						tbody.table-striped
+					div.btn-group-horizontal
+						button.btn.btn-info Update Price
+						button.btn.btn-danger Delete Table
+				div#schedulepane(style="visiblity:hidden;display:none")
+					table.scheduletable
+						
+			
+include scripts
+script(type="text/javascript",src="../js/dspage.js")
+

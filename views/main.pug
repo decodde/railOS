@@ -1,0 +1,17 @@
+include top
+
+body(style="background:url('../images/locomotive-60539.jpg')")
+		div(style="width:300px;margin:auto;margin-top:40%")
+				h4.red.card-panel Login
+				br
+				form(action="/login",method="POST")
+					div.form-group
+						label(for="user") Username
+						input.form-control#user(type="text",placeholder="Username")
+					div.form-group
+						label(for="pwd") Password
+						input.form-control#pwd(type="password",placeholder="Password")
+				button.btn.btn-info(type="submit",onclick="login()") Login
+
+script(type="text/javascript",src="../js/main.js")
+include scripts
