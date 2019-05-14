@@ -18,7 +18,7 @@ app.use(express.static(__dirname+"/public"))
 app.set('view engine',  'pug');
 
 app.get("/",function(req,res){
-		res.render("dspage")
+		res.render("main")
 })
 
 app.post("/login",function(req,res){
