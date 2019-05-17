@@ -1,14 +1,13 @@
 var express=require("express")
 var app=express()
 
-var db
+var db0
 var users="users"
 
 const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb+srv://railosapp:<password>@cluster0-vkklb.mongodb.net/test?retryWrites=true";
-const client = new MongoClient(uri, { useNewUrlParser: true });
-client.connect(err => {
-  db= client.db("users")
+MongoClient.connect(uri,function(err,db){
+    db0 = db;
 });
 
 app.use(require('body-parser')());
