@@ -1,4 +1,7 @@
 function show(x){
+    $(".nav-item.active").toggleClass("active")
+    console.log(x)
+    $("."+x).toggleClass("active")
 	var p=document.getElementById("pricepane")
 	var s=document.getElementById("schedulepane")
 	if(x=="priceb"){
@@ -18,23 +21,24 @@ function show(x){
 		s.style.zIndex="1"
 	}
 }
+
 function getschedule(){
 	$.get("/getschedule",function(response){
-        
+
     })
 }
 function updschedule(){
-	
+
 }
 function delschedule(){
-	
+
 }
 function getprice(){
-	
+
 }
 function updprice(){
-	
+
 }
 function delprice(){
-	
+
 }

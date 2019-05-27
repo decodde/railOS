@@ -13,7 +13,13 @@
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.4",
     "express": "^4.16.4",
+    "express-session": "^1.16.1",
     "mongodb": "^3.2.4",
+    "mongoose": "^5.5.9",
     "pug": "^2.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.0",
+    "postman": "^0.2.0"
   }
 }

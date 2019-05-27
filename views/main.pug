@@ -1,17 +1,15 @@
 include top
 
-body(style="background:url('../images/locomotive-60539.jpg')")
-		div(style="width:300px;margin:auto;margin-top:40%")
-				h4.red.card-panel Login
-				br
-				form(action="/login",method="POST")
-					div.form-group
-						label(for="user") Username
-						input.form-control#user(type="text",placeholder="Username")
-					div.form-group
-						label(for="pwd") Password
-						input.form-control#pwd(type="password",placeholder="Password")
-				button.btn.btn-info(type="submit",onclick="login()") Login
-
-script(type="text/javascript",src="../js/main.js")
+body.row(style="background:url('../images/gr02.jpg')")
+    div.align-self-center(style="padding:40px;border-radius:5px;float:none;background-color:white;width:300px;margin:0 auto;")
+        h4 Login
+        br
+        form.form(method="POST")
+            div.form-group
+                p.alert.alert-primary#details
+                input.form-control#user(type="text",placeholder="Username")
+            div.form-group
+                input.form-control#pwd(type="password",placeholder="Password")
+            button.btn.btn-primary(type="submit",onclick="login()") Login
 include scripts
+script(type="text/javascript",src="../js/views-js/main.js")

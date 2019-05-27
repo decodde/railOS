@@ -1,7 +1,7 @@
 include top
 
 .wrapper
-  .sidebar(data-color='azure' data-background-color='white' data-image='../images/tr1.png')
+  .sidebar(data-color='green' data-background-color='white' data-image='../images/tech1.jpg')
     //
       Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
       Tip 2: you can also add an image using data-image tag
@@ -20,7 +20,7 @@ include top
         li.nav-item.active.priceb
           a.nav-link#priceb(onclick="show(this.id)")
             i.material-icons dashboard
-            p Manage Pricing
+            p Manage Employers / Users
         li.nav-item.scheduleb
           a.nav-link#scheduleb(onclick="show(this.id)")
             i.material-icons content_paste
@@ -63,24 +63,54 @@ include top
     // End Navbar
     .content
         .container-fluid
-            .row#pricepane(style="display:block;visbility:hidden;z-index:0")
-                .card.card-stats
-                    .card-header.card-header-success
-                        h3.card-title
-                            | Manage Ticket Price Of Your Station
-                    .card-body
-                    .stats
-                        i.material-icons.text-danger warning
-                        a(href='#pablo') Get More Space...
-            .row#schedulepane(style="display:none;visbility:hidden;z-index:0")
-                .card.card-stats
-                    .card-header.card-header-warning
-                        h3.card-title
-                            | Manage Train Schedule Of Your Station
-                    .card-body
-                    .stats
-                        i.material-icons.text-danger warning
-                        a(href='#pablo') Get More Space...
+            div#manageuserpane
+                ul.nav.nav-pills.nav-pills-primary(role='tablist')
+                    li.nav-item
+                        a.nav-link.active(data-toggle='tab' href='#link1' role='tablist' aria-expanded='true') Create User
+                    li.nav-item
+                        a.nav-link(data-toggle='tab' href='#link2' role='tablist' aria-expanded='false') Edit Users
+                    li.nav-item
+                        a.nav-link(data-toggle='tab' href='#link3' role='tablist' aria-expanded='false') Options
+                br
+                br
+                .tab-content.tab-space(data-color="white")
+                    #link1.tab-pane.active(aria-expanded='true')
+                        div.card(style="width:80%")
+                            div.card-header
+                            form.createuser.card-body(method="POST")
+                                div.bmd-form-group.form-group
+                                    label.bmd-label-floating Username
+                                    input.form-control#user(type="text")
+                                div.form-group
+                                    label.bmd-label-floating First Name
+                                    input.form-control#firstname(type="text")
+                                div.form-group
+                                    label.bmd-label-floating Last name
+                                    input.form-control#lastname(type="text")
+                                div.form-group
+                                    label(for='role') Role
+                                    div.dropdown.bootstrap-select
+                                        select#role.form-control.selectpicker(data-style='btn btn-link')
+                                            option Administrator
+                                            option Frontdesk
+                                            option Customer
+                                            option Editor
+                                            option D.S
+                                div.form-group
+                                    input.form-control#pwd(type="password",placeholder="Password")
+                                
+                                button.btn.btn-primary(type="submit",onclick="login()") Login
+                    #link2.tab-pane(aria-expanded='false')
+                        | Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas.
+                        br
+                        br
+                        | Dramatically maintain clicks-and-mortar solutions without functional solutions.
+                    #link3.tab-pane(aria-expanded='false')
+                        | Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas.
+                        br
+                        br
+                        | Dynamically innovate resource-leveling customer service for state of the art customer service.
+
     .footer
       .container-fluid
         nav.float-left
@@ -102,5 +132,3 @@ include top
     .close-layer.visible
 
 include scripts
-script(type="text/javascript",src="../js/views-js/dspage.js")
-
