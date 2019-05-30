@@ -18,17 +18,17 @@ include top
               .ripple-container
       ul.nav
         li.nav-item.active.priceb
-          a.nav-link#priceb(onclick="show(this.id)")
+          a.nav-link
             i.material-icons dashboard
-            p Manage Pricing
+            p Customer Query
         li.nav-item.scheduleb
-          a.nav-link#scheduleb(onclick="show(this.id)")
+          a.nav-link(href="/editor")
             i.material-icons content_paste
-            p Manage Train Schedule
+            p Editor Page
         li.nav-item.traintrackb
-          a.nav-link#scheduleb(onclick="show(this.id)")
+          a.nav-link(href="/customer")
             i.material-icons location_ons
-            p Train Tracking
+            p Customer Page
       .ps-scrollbar-x-rail(style='left: 0px; bottom: 0px;')
         .ps-scrollbar-x(tabindex='0' style='left: 0px; width: 0px;')
       .ps-scrollbar-y-rail(style='top: 0px; right: 0px;')
@@ -63,20 +63,11 @@ include top
     // End Navbar
     .content
         .container-fluid
-            .row#pricepane(style="display:block;visbility:hidden;z-index:0")
+            .row(style="display:block;visbility:hidden;z-index:0")
                 .card.card-stats
                     .card-header.card-header-success
                         h3.card-title
-                            | Manage Ticket Price Of Your Station
-                    .card-body
-                    .stats
-                        i.material-icons.text-danger warning
-                        a(href='#pablo') Get More Space...
-            .row#schedulepane(style="display:none;visbility:hidden;z-index:0")
-                .card.card-stats
-                    .card-header.card-header-warning
-                        h3.card-title
-                            | Manage Train Schedule Of Your Station
+                            | Customer Query
                     .card-body
                     .stats
                         i.material-icons.text-danger warning

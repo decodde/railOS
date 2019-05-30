@@ -7,9 +7,9 @@ body.row(style="background:url('../images/gr02.jpg')")
         form.form(method="POST")
             div.form-group
                 p.alert.alert-primary#details
-                input.form-control#user(type="text",placeholder="Username")
+                input.form-control#user(type="text",placeholder="Username",required)
             div.form-group
-                input.form-control#pwd(type="password",placeholder="Password")
+                input.form-control#pwd(type="password",placeholder="Password",required)
             button.btn.btn-primary(type="submit",onclick="login()") Login
 include scripts
 script(type="text/javascript",src="../js/views-js/main.js")
