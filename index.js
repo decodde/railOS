@@ -8,6 +8,7 @@ var dbusers;
 
 mongo.connect(mongodbURL,function(err,db0){
     db=db0.db("railos");
+    
     dbusers=db.collection("users");
 })
 app.use(require('body-parser')());
