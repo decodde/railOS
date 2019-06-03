@@ -1,10 +1,6 @@
-include top
 
 .wrapper
   .sidebar(data-color='green' data-background-color='white' data-image='../images/tech1.jpg')
-    //
-      Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
-      Tip 2: you can also add an image using data-image tag
     .logo
       a.simple-text.logo-normal
         | Welcome #{lastname}
@@ -22,9 +18,14 @@ include top
             i.material-icons dashboard
             p Manage Employers / Users
         li.nav-item.scheduleb
+          a.nav-link#scheduleb(href="/ds")
+            i.material-icons content_paste
+            p DS Page
+        li.nav-item.scheduleb
           a.nav-link#scheduleb(href="/editor")
             i.material-icons content_paste
             p Editor Page
+        
         li.nav-item.traintrackb
           a.nav-link#scheduleb(onclick="show(this.id)")
             i.material-icons location_ons
@@ -68,7 +69,7 @@ include top
                     li.nav-item
                         a.nav-link.active(data-toggle='tab' href='#link1' role='tablist' aria-expanded='true') Create User
                     li.nav-item
-                        a.nav-link(data-toggle='tab' href='#link2' role='tablist' aria-expanded='false') Edit Users
+                        a.nav-link(data-toggle='tab' href='#link2' role='tablist' aria-expanded='false' onclick="getusers()") Edit Users
                     li.nav-item
                         a.nav-link(data-toggle='tab' href='#link3' role='tablist' aria-expanded='false') Options
                 br
@@ -100,9 +101,11 @@ include top
                                                 option IB
                                                 option KS
                                     div.form-group.bmd-form-group.col-md-5
-                                        label.bmd-label-floating Role
+                                        
                                         div.dropdown.bootstrap-select
+                                            label.bmd-label-floating Role
                                             select#role.form-control(required,data-style='btn btn-link')
+                                                option
                                                 option Administrator
                                                 option Frontdesk
                                                 option Customer
@@ -116,7 +119,9 @@ include top
                         div.card
                             div.card-header
                                 form
-                                    
+                            div.card-body#datazone
+
+
                     #link3.tab-pane(aria-expanded='false')
                         | Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas.
                         br

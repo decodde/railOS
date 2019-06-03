@@ -17,6 +17,11 @@ include top
               i.material-icons search
               .ripple-container
       ul.nav
+        if role=="admin"|role=="ds"|role=="editor"
+            li.nav-item.active.priceb
+            a.nav-link#priceb(href="/dashboard")
+                i.material-icons dashboard
+                p Dashboard
         li.nav-item.active.priceb
           a.nav-link
             i.material-icons dashboard

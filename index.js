@@ -3,12 +3,13 @@ var app=express()
 const mongo=require('mongodb').MongoClient
 const mongodbURL = 'mongodb+srv://railosapp:mongo@railos-vkklb.mongodb.net/test?retryWrites=true';
 var session=require('express-session')
+let ObjectId=require("mongodb").ObjectId
 var db;
 var dbusers;
 
 mongo.connect(mongodbURL,function(err,db0){
     db=db0.db("railos");
-    
+
     dbusers=db.collection("users");
 })
 app.use(require('body-parser')());
@@ -154,6 +155,7 @@ app.get("/ds",function(req,res){
 
 })
 
+app.post("/customer-query")
 app.get("/trainschedule",function(req,res){
 
 })
@@ -175,31 +177,15 @@ app.get("/admin",function(req,res){
     }
     else res.render("401")
 })
-///////   delete account  //////////////////////
-app.delete("/deleteacct",function(res,req){
-    if(req.session&&(req.session.role=="admin"||"ds")){
-        dbusers.find({username:req.body.username,firstname:req.body.firstname,lastname:req.body.lastname}).toArray((err,data)=>{
-            if(data&&data.length==0){
-                res.send({value:false,string:"User does not exist"})
-            }
-            else if(data&&data.length>0){
-                dbusers.remove({username:req.body.username,firstname:req.body.firstname,lastname:req.body.lastname})
-                res.send({value:true,string:"User deleted successfully"})
-            }
-        })
-
-    }
-    else res.render("401")
-})
 //////   getusers  ///////////////////////////////
 app.get("/getusers",function(req,res){
     if(req.session&&(req.session.role=="admin"||"ds")){
-        dbuser.find({}).toArray((err,data)=>{
+        dbusers.find({},{"_id":1,"password":0}).toArray((err,data)=>{
             if(err){
                 console.log(err)
                 res.send({value:false,string:"Error retrieving data"})
             }
-            if(data&&data.length>0){
+            if(data&&data.length>=0){
                 res.send({value:true,data:data})
             }
         })
@@ -217,6 +203,10 @@ app.post("/register",function(req,res){
             else if(data&&data.length==0){
                 let pwd0=req.body.firstname[0].toLowerCase()+req.body.lastname.toLowerCase()
                 let role=req.body.role.toLowerCase();
+                let uname=req.body.username
+                if(""==uname){
+                    uname=req.body.firstname.toLowerCase()
+                }
                 dbusers.insertOne({username:req.body.firstname,password:pwd0,firstname:req.body.firstname,lastname:req.body.lastname,role:role,station:req.body.station})
                 //console.log("success")
                 res.send({value:true,string:"User Created Successfully"})
@@ -225,6 +215,46 @@ app.post("/register",function(req,res){
         })
     }
 })
+///////   delete account  //////////////////////
+app.post("/deleteacct",function(req,res){
+    //console.log(req.session)
+    if(req.session&&/^(?:admin|ds)$/.test(req.session.role)){
+        console.log("request for del")
+        var o_id=new ObjectId(req.body.id)
+        dbusers.find({_id:o_id}).toArray((err,data)=>{
+            if(data&&data.length==0){
+                res.send({value:false,string:"User does not exist"})
+            }
+            else if(data&&data.length>0){
+                dbusers.remove({_id:o_id})
+                res.send({value:true,string:"User deleted successfully"})
+            }
+        })
+
+    }
+    else res.render("401")
+})
+////// update user ////////////////////////////////
+app.post("/upduser",(req,res)=>{
+    if(req.session&&/^(?:admin|ds)$/.test(req.session.role)){
+            dbusers.findOne({_id:ObjectId(req.body.user)}).toArray((err,data)=>{
+                if(err){
+                    console.log(err)
+                }
+                if(data&&data.length>0){
+                    dbusers.updateOne({_id:ObjectId(req.body.user)},{$set:{username:req.body.newusername,firstname:req.body.newfirstname,lastname:req.body.newlastname,role:req.body.newrole,station:req.body.newstation}})
+                    res.send({value:true,string:"User update Successful"})
+                }
+                else if(data&&data.length==0){
+                    res.send({value:false,string:"User does not exist"})
+
+                }
+            })
+    }
+}
+)
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 

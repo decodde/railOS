@@ -23,9 +23,7 @@ $(".createuser").submit(function(event) {
                 })
 
 });
-function getuserrs(){
-    $.post("/getusers",)
-}
+
 function noty(from, align,msg,time,type){
 
   $.notify({
@@ -40,7 +38,7 @@ function noty(from, align,msg,time,type){
           align: align
       }
   });
-}
+};
 function show(x){
     $(".ctrl.nav-item.active").toggleClass("active")
     console.log(x)
@@ -63,4 +61,79 @@ function show(x){
 		s.style.visibility="visible"
 		s.style.zIndex="1"
 	}
+}
+
+
+function getusers(){
+    $.get("/getusers",{dta:"p"},(response)=>{
+        console.log(response)
+        if(response.value){
+            if(response.data.length>0){
+                $("#datazone").empty()
+                for(let i=0;i<response.data.length;i++){
+                    $("#datazone").append(`<div class="card ${response.data[i]._id}"
+                     style="padding:10px"><span style="float:left"><span>${response.data[i].firstname}  ${response.data[i].lastname}</span><br><span>${response.data[i].username}</span></span><span style="float:right"><span id=${response.data[i]._id} class="btn btn-warning" onclick="del(this.id)">Delete User</span><span id=${response.data[i]._id} 
+                    class="btn btn-info" onclick="edit(this.id,'${response.data[i].username}','${response.data[i].firstname}','${response.data[i].lastname}','${response.data[i].role}','${response.data[i].station}')`+`">Edit User</span></span></div>`).children(':last').hide().fadeIn(1000)
+                }
+            }
+            else if(response.data.length==0){
+
+            }
+        }
+    })
+}
+
+function del(x){
+    console.log("delete "+x)
+    Swal.fire({
+  title: 'Are you sure?',
+  text: "You won't be able to revert this!",
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete user'
+}).then((result) => {
+  if (result.value) {
+      console.log("here")
+      $.post("/deleteacct",{id:x},(response)=>{
+        if(response.value){
+            $("div ."+x).remove()
+            noty("top","right",response.string,"3000","success")
+        }
+        else if(!response.value){
+            noty("top","right",response.string,"3000","fail")
+        }
+    })
+  }
+})
+    
+}
+function edit(x,uname,fname,lname,role,station){
+    Swal.fire({
+  title: `Edit User ${x}`,
+  html:
+    `<input class="swal2-input" value=${uname}  placeholder="username" type="text" id="euname" required>`+
+    `<input class="swal2-input" value=${fname}  placeholder="firstname" type="text" id="efname" required>`+
+    `<input class="swal2-input" value=${lname}  placeholder="lastname" type="text" id="elname" required>`+
+    `<input class="swal2-input" value=${role}  placeholder="role" type="text" id="erole" required>`+
+    `<input class="swal2-input" value=${station}  placeholder="role" type="text" id="estation" required>`,
+  focusConfirm: false,
+  preConfirm: () => {
+      let newusername=$("#euname").val()
+      let newfirstname=$("#efname").val()
+      let newlastname=$("#elname").val()
+      let newrole=$("#erole").val()
+      let newstation=$("#estation").val()
+    $.post("/upduser",{user:x,newusername:newusername,newfirstname:newfirstname,newlastname:newlastname,newrole:newrole,newstation:newstation},(response)=>{
+        if(response.value){
+            noty("top","right",response.string,"3000","success")
+            getusers()
+        }
+        else if(!response.value){
+            noty("top","right",response.string,"3000","fail")
+        }
+    })
+  }
+})
 }

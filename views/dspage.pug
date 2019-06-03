@@ -17,6 +17,11 @@ include top
               i.material-icons search
               .ripple-container
       ul.nav
+        if role=="admin"
+            li.nav-item.active.priceb
+            a.nav-link#priceb(href="/dashboard")
+                i.material-icons dashboard
+                p Dashboard
         li.nav-item.active.priceb
           a.nav-link
             i.material-icons dashboard
@@ -69,9 +74,23 @@ include top
                         h3.card-title
                             | Customer Query
                     .card-body
-                    .stats
-                        i.material-icons.text-danger warning
-                        a(href='#pablo') Get More Space...
+                    form.search.row
+                            div.bmd-form-group.form-group.col-md-2
+                                .dropdown
+                                    button#typesearch.btn.btn-secondary.dropdown-toggle(value='Any' type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false') ---
+                                    .dropdown-menu(aria-labelledby='typesearch')
+                                        a.dropdown-item(href='#',onclick="$('button#typesearch').text($(this).text())") ---
+                                        a.dropdown-item(href='#',onclick="$('button#typesearch').text($(this).text())") Username
+                                        a.dropdown-item(href='#',onclick="$('button#typesearch').text($(this).text())") Firstname
+                                        a.dropdown-item(href='#',onclick="$('button#typesearch').text($(this).text())") Lastname
+                            div.bmd-form-group.form-group.col-md-6
+                                .input-group.no-border
+                                    input.form-control(type='text' value='' placeholder='search by username | lastname... e.g John Doe')
+                                    button.btn.btn-white.btn-round.btn-just-icon(type='submit')
+                                        i.material-icons search
+                                        .ripple-container
+
+
     .footer
       .container-fluid
         nav.float-left
