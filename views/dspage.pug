@@ -1,7 +1,7 @@
 include top
 
 .wrapper
-  .sidebar(data-color='azure' data-background-color='white' data-image='../images/tr1.png')
+  .sidebar(data-color='azure' data-background-color='white')
     //
       Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
       Tip 2: you can also add an image using data-image tag
@@ -38,7 +38,6 @@ include top
         .ps-scrollbar-x(tabindex='0' style='left: 0px; width: 0px;')
       .ps-scrollbar-y-rail(style='top: 0px; right: 0px;')
         .ps-scrollbar-y(tabindex='0' style='top: 0px; height: 0px;')
-    .sidebar-background(style='background-image: url(../assets/img/sidebar-1.jpg) ')
   .main-panel.ps-container.ps-theme-default(data-ps-id='34572a16-51b8-c89e-557c-35aee30545f7')
     // Navbar
     nav.navbar.navbar-expand-lg.navbar-transparent.navbar-absolute.fixed-top
@@ -74,7 +73,8 @@ include top
                         h3.card-title
                             | Customer Query
                     .card-body
-                    form.search.row
+                    form.search(style="padding:10px")
+                        div.row
                             div.bmd-form-group.form-group.col-md-2
                                 .dropdown
                                     button#typesearch.btn.btn-secondary.dropdown-toggle(value='Any' type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false') ---
@@ -84,11 +84,24 @@ include top
                                         a.dropdown-item(href='#',onclick="$('button#typesearch').text($(this).text())") Firstname
                                         a.dropdown-item(href='#',onclick="$('button#typesearch').text($(this).text())") Lastname
                             div.bmd-form-group.form-group.col-md-6
-                                .input-group.no-border
+                                .input-group
                                     input.form-control(type='text' value='' placeholder='search by username | lastname... e.g John Doe')
                                     button.btn.btn-white.btn-round.btn-just-icon(type='submit')
                                         i.material-icons search
                                         .ripple-container
+                        div#accordion(role="tablist",style="padding:15px")
+                            div.card.card-collapse
+                                #headingOne.card-header(role='tab')
+                                    h5.mb-0
+                                    a(data-toggle='collapse' href='#collapseOne' aria-expanded='true' aria-controls='collapseOne') Refine Your Search
+                                        i.material-icons keyboard_arrow_down
+                                #collapseOne.card-body.collapse.show(role='tabpanel' aria-labelledby='headingOne' data-parent='#accordion' style="padding:8px")
+                                    div.form-check.row
+                                        .form-group
+                                            select.form-control
+                                                option asas
+                                                option greater than
+                                                option less than
 
 
     .footer

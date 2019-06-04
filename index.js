@@ -155,7 +155,10 @@ app.get("/ds",function(req,res){
 
 })
 
-app.post("/customer-query")
+///////   customer query //////////////////////////
+app.post("/customer-query",function(req,res){
+    
+})
 app.get("/trainschedule",function(req,res){
 
 })

@@ -57,4 +57,62 @@ include top
                 a.dropdown-item(href='#') Settings
                 .dropdown-divider
                 a.dropdown-item(onclick="logout()") Log out
+    .content
+        .container-fluid
+            .row
+                .card
+                    .card-header.card-header-primary.card-header-text
+                        .card-text
+                            h3.card-title
+                                | New Travel
+                    form.card-body
+                        div.row(style='padding:10px')
+                            div.bmd-form-group.form-group.col-md-4
+                                label.bmd-label-floating Firstname
+                                input.form-control#fname(type="text" required)
+                            div.bmd-form-group.form-group.col-md-4
+                                label.bmd-label-floating Lastname
+                                input.form-control#lname(type="text" required)
+
+                        div.row(style="padding:10px")
+                            div.bmd-form-group.form-group.col-md-3
+                                label.bmd-label-floating Trip Origin
+                                div.dropdown.bootstrap-select
+                                    select#ostation.form-control(data-style='btn btn-link')
+                                        option IB
+                            div.bmd-form-group.form-group.col-md-3
+                                label.bmd-label-floating Trip Destination
+                                div.dropdown.bootstrap-select
+                                    select#dstation.form-control(data-style='btn btn-link')
+                                        option IB
+                            div.bmd-form-group.form-group.col-md-3
+                                label.bmd-label-floating Ticket Type
+                                div.dropdown.bootstrap-select
+                                    select#ticketclass.form-control(data-style='btn btn-link')
+                                        option Sleeper
+                                        option First Class
+                                        option Second Class
+                        div.row(style="padding:10px")
+                            div.bmd-form-group.form-group.col-md-5
+                                label.bmd-label-floating Reason for travel
+                                input.form-control#reason(type="text" required)
+    .footer
+      .container-fluid
+        nav.float-left
+          ul
+            li
+              a
+                | railOS
+            li
+              a(href='https://geniuscreations.ga/railos')
+                | powered by genius creations
+        .copyright.float-right
+          | &copy;
+          script.
+            document.write(new Date().getFullYear())
+    .ps-scrollbar-x-rail(style='left: 0px; bottom: 0px;')
+      .ps-scrollbar-x(tabindex='0' style='left: 0px; width: 0px;')
+    .ps-scrollbar-y-rail(style='top: 0px; right: 0px;')
+      .ps-scrollbar-y(tabindex='0' style='top: 0px; height: 0px;')
+    .close-layer.visible
 include scripts
