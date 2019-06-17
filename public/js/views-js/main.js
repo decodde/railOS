@@ -13,6 +13,3 @@ $(".form").submit(function(event) {
 	})
     // TODO
 });
-function login(){
-
-}

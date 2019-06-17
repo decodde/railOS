@@ -1,0 +1,24 @@
+include top
+    | Customer Query
+
+body
+    div.card
+        div.card-header
+            h3 Customer Query
+        div.card-body
+            form.search
+                div.row(style="padding:10px")
+                    div.form-group.bmd-form-group.col-md-2
+                        label.bmd-label-floating search firstname
+                        input.form-control#sfname(type="text")
+                    div.form-group.bmd-form-group.col-md-2
+                        label.bmd-label-floating search lastname
+                        input.form-control#slastname(type="text")
+                    div.form-group.bmd-form-group.col-md-2
+                        label.bmd-label-floating search station
+                        input.form-control#slastname(type="text")
+                button.btn.btn-primary(type="submit") Query
+
+
+include scripts
+script(type="text/javascript" src="../js/views-js/custom-query.js")

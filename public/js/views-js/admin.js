@@ -72,7 +72,8 @@ function getusers(){
                 $("#datazone").empty()
                 for(let i=0;i<response.data.length;i++){
                     $("#datazone").append(`<div class="card ${response.data[i]._id}"
-                     style="padding:10px"><span style="float:left"><span>${response.data[i].firstname}  ${response.data[i].lastname}</span><br><span>${response.data[i].username}</span></span><span style="float:right"><span id=${response.data[i]._id} class="btn btn-warning" onclick="del(this.id)">Delete User</span><span id=${response.data[i]._id} 
+                     style="padding:10px"><span style="float:left"><span>Firstname : ${response.data[i].firstname}</span>  
+                     &nbsp;&nbsp;&nbsp;<span>Lastname :  ${response.data[i].lastname}</span><br><span>Username : ${response.data[i].username}</span>&nbsp;&nbsp;&nbsp;<span>Role : ${response.data[i].role}</span></span><span style="float:right"><span id=${response.data[i]._id} class="btn btn-warning" onclick="del(this.id)">Delete User</span><span id=${response.data[i]._id}
                     class="btn btn-info" onclick="edit(this.id,'${response.data[i].username}','${response.data[i].firstname}','${response.data[i].lastname}','${response.data[i].role}','${response.data[i].station}')`+`">Edit User</span></span></div>`).children(':last').hide().fadeIn(1000)
                 }
             }
@@ -107,17 +108,17 @@ function del(x){
     })
   }
 })
-    
+
 }
 function edit(x,uname,fname,lname,role,station){
     Swal.fire({
   title: `Edit User ${x}`,
   html:
-    `<input class="swal2-input" value=${uname}  placeholder="username" type="text" id="euname" required>`+
-    `<input class="swal2-input" value=${fname}  placeholder="firstname" type="text" id="efname" required>`+
-    `<input class="swal2-input" value=${lname}  placeholder="lastname" type="text" id="elname" required>`+
-    `<input class="swal2-input" value=${role}  placeholder="role" type="text" id="erole" required>`+
-    `<input class="swal2-input" value=${station}  placeholder="role" type="text" id="estation" required>`,
+    `<input class="swal2-input" value='${uname}'  placeholder="username" type="text" id="euname" required>`+
+    `<input class="swal2-input" value='${fname}'  placeholder="firstname" type="text" id="efname" required>`+
+    `<input class="swal2-input" value='${lname}'  placeholder="lastname" type="text" id="elname" required>`+
+    `<input class="swal2-input" value='${role}'  placeholder="role" type="text" id="erole" required>`+
+    `<input class="swal2-input" value='${station}'  placeholder="station" type="text" id="estation" required>`,
   focusConfirm: false,
   preConfirm: () => {
       let newusername=$("#euname").val()

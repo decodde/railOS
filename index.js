@@ -157,7 +157,22 @@ app.get("/ds",function(req,res){
 
 ///////   customer query //////////////////////////
 app.post("/customer-query",function(req,res){
-    
+    if(req.session&&/^(?:admin|ds)$/.test(req.session.role)){
+        dbusers.find(req.body,{_id:0, password:0}).toArray((err,data)=>{
+            console.log(data)
+            if(err) console.log(err)
+            if(data&&data.length>=0){
+                 res.send(data)
+            }     
+        })
+    }
+    else res.render("401")
+})
+app.get("/customer-query",(req,res)=>{
+    if(req.session&&/^(?:admin|ds)$/.test(req.session.role)){
+        res.render("customerquery",{role:req.session.role,firstname:req.session.firstname,lastname:req.session.lastname})
+    }
+    else res.render("401")
 })
 app.get("/trainschedule",function(req,res){
 
@@ -183,7 +198,7 @@ app.get("/admin",function(req,res){
 //////   getusers  ///////////////////////////////
 app.get("/getusers",function(req,res){
     if(req.session&&(req.session.role=="admin"||"ds")){
-        dbusers.find({},{"_id":1,"password":0}).toArray((err,data)=>{
+        dbusers.find({},{_id:1,password:0}).toArray((err,data)=>{
             if(err){
                 console.log(err)
                 res.send({value:false,string:"Error retrieving data"})
@@ -240,7 +255,7 @@ app.post("/deleteacct",function(req,res){
 ////// update user ////////////////////////////////
 app.post("/upduser",(req,res)=>{
     if(req.session&&/^(?:admin|ds)$/.test(req.session.role)){
-            dbusers.findOne({_id:ObjectId(req.body.user)}).toArray((err,data)=>{
+            dbusers.find({_id:ObjectId(req.body.user)}).toArray((err,data)=>{
                 if(err){
                     console.log(err)
                 }
@@ -287,7 +302,7 @@ app.post("/editacct",function(req,res){
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-app.listen(process.env.PORT||8090,function(){
+app.listen(process.env.PORT||3000,function(){
           console.log("_._._._🚂-[¤ ¤]-[¤ ¤ ¤]-[¤ ¤ ¤]-[¤ ¤ ¤]_._ ______ railOS server running ")
 }
 )

@@ -1,152 +1,131 @@
 
 .wrapper
-  .sidebar(data-color='green' data-background-color='white' data-image='../images/tech1.jpg')
-    .logo
-      a.simple-text.logo-normal
-        | Welcome #{lastname}
-    .sidebar-wrapper.ps-container.ps-theme-default(data-ps-id='729e444c-3cc6-9ec2-88b4-d964b6cd0b8a')
-      form.navbar-form
-        span.bmd-form-group
-          .input-group.no-border
-            input.form-control(type='text' value='' placeholder='Search...')
-            button.btn.btn-white.btn-round.btn-just-icon(type='submit')
-              i.material-icons search
-              .ripple-container
-      ul.nav.ctrl
-        li.nav-item.active.musers
-          a.nav-link#musers(onclick="show(this.id)")
-            i.material-icons dashboard
-            p Manage Employers / Users
-        li.nav-item.scheduleb
-          a.nav-link#scheduleb(href="/ds")
-            i.material-icons content_paste
-            p DS Page
-        li.nav-item.scheduleb
-          a.nav-link#scheduleb(href="/editor")
-            i.material-icons content_paste
-            p Editor Page
-        
-        li.nav-item.traintrackb
-          a.nav-link#scheduleb(onclick="show(this.id)")
-            i.material-icons location_ons
-            p Train Tracking
-      .ps-scrollbar-x-rail(style='left: 0px; bottom: 0px;')
-        .ps-scrollbar-x(tabindex='0' style='left: 0px; width: 0px;')
-      .ps-scrollbar-y-rail(style='top: 0px; right: 0px;')
-        .ps-scrollbar-y(tabindex='0' style='top: 0px; height: 0px;')
-    .sidebar-background(style='background-image: url(../assets/img/sidebar-1.jpg) ')
-  .main-panel.ps-container.ps-theme-default(data-ps-id='34572a16-51b8-c89e-557c-35aee30545f7')
-    // Navbar
-    nav.navbar.navbar-expand-lg.navbar-transparent.navbar-absolute.fixed-top
-      .container-fluid
-        .navbar-wrapper
-          p.navbar-brand railOS
-        button.navbar-toggler.toggled(type='button' data-toggle='collapse' aria-controls='navigation-index' aria-expanded='false' aria-label='Toggle navigation')
-          span.sr-only Toggle navigation
-          span.navbar-toggler-icon.icon-bar
-          span.navbar-toggler-icon.icon-bar
-          span.navbar-toggler-icon.icon-bar
-        .collapse.navbar-collapse.justify-content-end
-          ul.navbar-nav
-            li
-                p.name #{lastname} #{firstname}
-            li.nav-item.dropdown
-              a#navbarDropdownProfile.nav-link(href='#pablo' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
-                i.material-icons person
-                p.d-lg-none.d-md-block
-                  | Account
-                .ripple-container
-              .dropdown-menu.dropdown-menu-right(aria-labelledby='navbarDropdownProfile')
-                a.dropdown-item(href='#') Profile
-                a.dropdown-item(href='#') Settings
-                .dropdown-divider
-                a.dropdown-item(onclick="logout()") Log out
-    // End Navbar
-    .content
-        .container-fluid
-            div#manageuserpane
-                ul.nav.nav-pills.nav-pills-primary(role='tablist')
-                    li.nav-item
-                        a.nav-link.active(data-toggle='tab' href='#link1' role='tablist' aria-expanded='true') Create User
-                    li.nav-item
-                        a.nav-link(data-toggle='tab' href='#link2' role='tablist' aria-expanded='false' onclick="getusers()") Edit Users
-                    li.nav-item
-                        a.nav-link(data-toggle='tab' href='#link3' role='tablist' aria-expanded='false') Options
-                br
-                br
-                .tab-content.tab-space(data-color="white")
-                    #link1.tab-pane.active(aria-expanded='true')
-                        div.card(style="width:80%")
-                            div.card-header
-                            form.createuser.card-body
-                                div.row
-                                    div.bmd-form-group.form-group.col-md-3
-                                        label.bmd-label-floating Username
-                                        input.form-control#user(type="text",disabled)
-                                    div.form-group.bmd-form-group.col-md-4
-                                        label.bmd-label-floating First Name
-                                        input.form-control#firstname(type="text",required)
-                                    div.form-group.bmd-form-group.col-md-4
-                                        label.bmd-label-floating Last name
-                                        input.form-control#lastname(type="text",required)
-                                br
-                                div.row
-                                    div.form-group.bmd-form-group.col-md-4
-                                        label.bmd-label-floating Station
-                                        div.dropdown.bootstrap-select
-                                            select#station.form-control(data-style='btn btn-link')
-                                                option
-                                                option GB
-                                                option KL
-                                                option IB
-                                                option KS
-                                    div.form-group.bmd-form-group.col-md-5
-                                        
-                                        div.dropdown.bootstrap-select
-                                            label.bmd-label-floating Role
-                                            select#role.form-control(required,data-style='btn btn-link')
-                                                option
-                                                option Administrator
-                                                option Frontdesk
-                                                option Customer
-                                                option Editor
-                                                option D.S
-                                div.form-group
-                                    input.form-control#pwd(type="password",placeholder="Password")
-                                br
-                                button.btn.btn-primary(type="submit") Create User
-                    #link2.tab-pane(aria-expanded='false')
-                        div.card
-                            div.card-header
-                                form
-                            div.card-body#datazone
+    .sidebar(data-background-color='white' data-active-color='danger')
+        .sidebar-wrapper
+            div
+                .logo
+                    a.simple-text.logo-normal
+                        | Welcome #{lastname}
+            ul.nav.ctrl
+                li.nav-item.active.musers
+                    a.nav-link#musers(onclick="show(this.id)")
+                        i.material-icons dashboard
+                        p Manage Employers / Users
+                li.nav-item.scheduleb
+                    a.nav-link#scheduleb(href="/ds")
+                        i.material-icons content_paste
+                        p DS Page
+                li.nav-item.scheduleb
+                    a.nav-link#scheduleb(href="/editor")
+                        i.material-icons content_paste
+                        p Editor Page
+
+                li.nav-item.traintrackb
+                    a.nav-link#scheduleb(onclick="show(this.id)")
+                        i.material-icons location_ons
+                        p Train Tracking
+    .main-panel
+        nav.navbar.navbar-default
+            .container-fluid
+                .navbar-header
+                    button.navbar-toggle(type='button')
+                        span.sr-only Toggle navigation
+                        span.icon-bar.bar1
+                        span.icon-bar.bar2
+                        span.icon-bar.bar3
+                    a.navbar-brand(href='#') Dashboard
+                .collapse.navbar-collapse
+                    ul.nav.navbar-nav.navbar-right
+                        li
+                        a.dropdown-toggle(href='#' data-toggle='dropdown')
+                            i.ti-panel
+                            p #{lastname} #{firstname}
+                        li.dropdown
+                        a.dropdown-toggle(href='#' data-toggle='dropdown')
+                            i.material-icons person
+                            p Account
+                            b.caret
+                        ul.dropdown-menu
+                            li
+                            a(onclick="logout()" href='#') Logout
+        .content
+            .container-fluid
+                div#manageuserpane
+                    ul.nav.nav-pills.nav-pills-primary(role='tablist')
+                        li.nav-item
+                            a.nav-link.active(data-toggle='tab' href='#link1' role='tablist' aria-expanded='true') Create User
+                        li.nav-item
+                            a.nav-link(data-toggle='tab' href='#link2' role='tablist' aria-expanded='false' onclick="getusers()") Edit Users
+                        li.nav-item
+                            a.nav-link(data-toggle='tab' href='#link3' role='tablist' aria-expanded='false') Options
+                    br
+                    br
+                    .tab-content.tab-space(data-color="white")
+                        #link1.tab-pane.active(aria-expanded='true')
+                            div.card(style="width:80%")
+                                div.card-header
+                                form.createuser.card-body
+                                    div.row
+                                        div.bmd-form-group.form-group.col-md-3
+                                            label.bmd-label-floating Username
+                                            input.form-control#user(type="text",disabled)
+                                        div.form-group.bmd-form-group.col-md-4
+                                            label.bmd-label-floating First Name
+                                            input.form-control#firstname(type="text",required)
+                                        div.form-group.bmd-form-group.col-md-4
+                                            label.bmd-label-floating Last name
+                                            input.form-control#lastname(type="text",required)
+                                    br
+                                    div.row
+                                        div.form-group.bmd-form-group.col-md-4
+                                            label.bmd-label-floating Station
+                                            div.dropdown.bootstrap-select
+                                                select#station.form-control(data-style='btn btn-link')
+                                                    option
+                                                    option GB
+                                                    option KL
+                                                    option IB
+                                                    option KS
+                                        div.form-group.bmd-form-group.col-md-5
+
+                                            div.dropdown.bootstrap-select
+                                                label.bmd-label-floating Role
+                                                select#role.form-control(required,data-style='btn btn-link')
+                                                    option
+                                                    option Administrator
+                                                    option Frontdesk
+                                                    option Customer
+                                                    option Editor
+                                                    option D.S
+                                    div.form-group
+                                        input.form-control#pwd(type="password",placeholder="Password")
+                                    br
+                                    button.btn.btn-primary(type="submit") Create User
+                        #link2.tab-pane(aria-expanded='false')
+                            div.card
+                                div.card-header
+                                    form
+                                div.card-body#datazone
 
 
-                    #link3.tab-pane(aria-expanded='false')
-                        | Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas.
-                        br
-                        br
-                        | Dynamically innovate resource-leveling customer service for state of the art customer service.
-
-    .footer
-      .container-fluid
-        nav.float-left
-          ul
-            li
-              a
-                | railOS
-            li
-              a(href='https://geniuscreations.ga/railos')
-                | powered by genius creations
-        .copyright.float-right
-          | &copy;
-          script.
-            document.write(new Date().getFullYear())
-    .ps-scrollbar-x-rail(style='left: 0px; bottom: 0px;')
-      .ps-scrollbar-x(tabindex='0' style='left: 0px; width: 0px;')
-    .ps-scrollbar-y-rail(style='top: 0px; right: 0px;')
-      .ps-scrollbar-y(tabindex='0' style='top: 0px; height: 0px;')
-    .close-layer.visible
-
+                        #link3.tab-pane(aria-expanded='false')
+                            | Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas.
+                            br
+                            br
+                            | Dynamically innovate resource-leveling customer service for state of the art customer service.
+        .footer
+            .container-fluid
+                nav.pull-left
+                ul
+                    li
+                    a
+                        | railOS
+                    li
+                    a(href='https://geniuscreations.ga/railos')
+                        | powered by genius creations
+                .copyright.float-right
+                | &copy;
+                script.
+                    document.write(new Date().getFullYear())
 include scripts
 script(type="text/javascript",src="../js/views-js/admin.js")
