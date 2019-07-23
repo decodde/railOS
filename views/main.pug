@@ -12,4 +12,10 @@ body.row(style="background:url('../images/gr02.jpg')")
                 input.form-control#pwd(type="password",placeholder="Password",required)
             button.btn.btn-primary(type="submit",onclick="login()") Login
 include scripts
-script(type="text/javascript",src="../js/views-js/main.js")
+script(type="text/javascript").
+    $(".form").submit((event)=> {
+        event.preventDefault();
+        $.post("/login",{username:$('#user').val(),password:$('#pwd').val()},(response)=>{
+            !response.value?$('#details').text(response.string):window.location="/dashboard"
+        })
+    });

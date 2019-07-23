@@ -1,131 +1,72 @@
-
-.wrapper
-    .sidebar(data-background-color='white' data-active-color='danger')
-        .sidebar-wrapper
-            div
-                .logo
-                    a.simple-text.logo-normal
-                        | Welcome #{lastname}
-            ul.nav.ctrl
-                li.nav-item.active.musers
-                    a.nav-link#musers(onclick="show(this.id)")
-                        i.material-icons dashboard
-                        p Manage Employers / Users
-                li.nav-item.scheduleb
-                    a.nav-link#scheduleb(href="/ds")
-                        i.material-icons content_paste
-                        p DS Page
-                li.nav-item.scheduleb
-                    a.nav-link#scheduleb(href="/editor")
-                        i.material-icons content_paste
-                        p Editor Page
-
-                li.nav-item.traintrackb
-                    a.nav-link#scheduleb(onclick="show(this.id)")
-                        i.material-icons location_ons
-                        p Train Tracking
-    .main-panel
-        nav.navbar.navbar-default
-            .container-fluid
-                .navbar-header
-                    button.navbar-toggle(type='button')
-                        span.sr-only Toggle navigation
-                        span.icon-bar.bar1
-                        span.icon-bar.bar2
-                        span.icon-bar.bar3
-                    a.navbar-brand(href='#') Dashboard
-                .collapse.navbar-collapse
-                    ul.nav.navbar-nav.navbar-right
-                        li
-                        a.dropdown-toggle(href='#' data-toggle='dropdown')
-                            i.ti-panel
-                            p #{lastname} #{firstname}
-                        li.dropdown
-                        a.dropdown-toggle(href='#' data-toggle='dropdown')
-                            i.material-icons person
-                            p Account
-                            b.caret
-                        ul.dropdown-menu
-                            li
-                            a(onclick="logout()" href='#') Logout
-        .content
-            .container-fluid
-                div#manageuserpane
-                    ul.nav.nav-pills.nav-pills-primary(role='tablist')
-                        li.nav-item
-                            a.nav-link.active(data-toggle='tab' href='#link1' role='tablist' aria-expanded='true') Create User
-                        li.nav-item
-                            a.nav-link(data-toggle='tab' href='#link2' role='tablist' aria-expanded='false' onclick="getusers()") Edit Users
-                        li.nav-item
-                            a.nav-link(data-toggle='tab' href='#link3' role='tablist' aria-expanded='false') Options
+header.navbar.navbar-expand.navbar-dark.flex-column.flex-md-row.bg-dark
+    code.navbar-brand.mr-0.mr-md-2(href="#") railOS
+    ul.navbar-nav.flex-row.ml-md-auto.d-none.d-md-flex
+        li.nav-item.dropdown
+            a.nav-item.nav-link.dropdown-toggle.mr-md-2(href="#",id="options",data-toggle="dropdown",aria-haspopup="true",aria-expanded="false") Welcome #{lastname}
+            div.dropdown-menu.dropdown-menu-right(aria-labelledby="options")
+                a.dropdown-item Logout
+.container-fluid
+    .row.flex-xl-nowrap
+        .card.card-body.col-sm-3.col-md-3.col-xl-2.bg-dark(style="margin-bottom:0px !important;border-radius:0px !important")
+            a.btn.btn-outline-info.text-info(href="/dashboard") Dashboard
+            br
+            a.btn.btn-outline-info.text-info(data-toggle="collapse",data-target="#mgusers",aria-expanded="false",aria-control="mgusers") Manage Users
+            br
+            a.btn.btn-outline-info.text-info(href="/ds") D.S Page
+            br
+            a.btn.btn-outline-info.text-info(href="/editor") Editor Page
+            br
+            a.btn.btn-outline-info.text-info(href="#") Train Tracking
+            
+        main.col-sm-9.col-md-9.col-xl-8.py-md-3.pl-md-5.bg-white(role="main")
+            .card.card-body#pt
+                .collapse#mgusers(data-parent="#pt")
+                    row
+                        a.col-md-3.btn.btn-outline-info.text-info(data-toggle="collapse",data-target="#createuser",aria-expanded="false",aria-control="createuser") Create User
+                        a.col.col-md-offset-1.col-md-3.btn.btn-outline-info.text-info(data-toggle="collapse",data-target="#edituser",aria-expanded="false",aria-control="#edituser") Edit User(s)
                     br
                     br
-                    .tab-content.tab-space(data-color="white")
-                        #link1.tab-pane.active(aria-expanded='true')
-                            div.card(style="width:80%")
-                                div.card-header
-                                form.createuser.card-body
-                                    div.row
-                                        div.bmd-form-group.form-group.col-md-3
-                                            label.bmd-label-floating Username
-                                            input.form-control#user(type="text",disabled)
-                                        div.form-group.bmd-form-group.col-md-4
-                                            label.bmd-label-floating First Name
-                                            input.form-control#firstname(type="text",required)
-                                        div.form-group.bmd-form-group.col-md-4
-                                            label.bmd-label-floating Last name
-                                            input.form-control#lastname(type="text",required)
-                                    br
-                                    div.row
-                                        div.form-group.bmd-form-group.col-md-4
-                                            label.bmd-label-floating Station
-                                            div.dropdown.bootstrap-select
-                                                select#station.form-control(data-style='btn btn-link')
-                                                    option
-                                                    option GB
-                                                    option KL
-                                                    option IB
-                                                    option KS
-                                        div.form-group.bmd-form-group.col-md-5
-
-                                            div.dropdown.bootstrap-select
-                                                label.bmd-label-floating Role
-                                                select#role.form-control(required,data-style='btn btn-link')
-                                                    option
-                                                    option Administrator
-                                                    option Frontdesk
-                                                    option Customer
-                                                    option Editor
-                                                    option D.S
-                                    div.form-group
-                                        input.form-control#pwd(type="password",placeholder="Password")
-                                    br
-                                    button.btn.btn-primary(type="submit") Create User
-                        #link2.tab-pane(aria-expanded='false')
-                            div.card
-                                div.card-header
-                                    form
-                                div.card-body#datazone
-
-
-                        #link3.tab-pane(aria-expanded='false')
-                            | Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas.
+                    .card.card-body#b
+                        form.collapse#createuser(data-parent="#b")
+                            div.row
+                                div.bmd-form-group.form-group.col-md-3
+                                    label.bmd-label-floating Username
+                                    input.form-control#user(type="text",disabled)
+                                div.form-group.bmd-form-group.col-md-4
+                                    label.bmd-label-floating First Name
+                                    input.form-control#firstname(type="text",required)
+                                div.form-group.bmd-form-group.col-md-4
+                                    label.bmd-label-floating Last name
+                                    input.form-control#lastname(type="text",required)
                             br
+                            div.row
+                                div.form-group.bmd-form-group.col-md-4
+                                    label.bmd-label-floating Station
+                                    div.dropdown.bootstrap-select
+                                        select#station.form-control(data-style='btn btn-link')
+                                            option
+                                            option GB
+                                            option KL
+                                            option IB
+                                            option KS
+                                div.form-group.bmd-form-group.col-md-5
+
+                                    div.dropdown.bootstrap-select
+                                        label Role
+                                        select#role.form-control(required,data-style='btn btn-link')
+                                            option
+                                            option admin
+                                            option Frontdesk
+                                            option Customer
+                                            option Editor
+                                            option D.S
+                            div.form-group
+                                input.form-control#pwd(type="password",placeholder="Password")
                             br
-                            | Dynamically innovate resource-leveling customer service for state of the art customer service.
-        .footer
-            .container-fluid
-                nav.pull-left
-                ul
-                    li
-                    a
-                        | railOS
-                    li
-                    a(href='https://geniuscreations.ga/railos')
-                        | powered by genius creations
-                .copyright.float-right
-                | &copy;
-                script.
-                    document.write(new Date().getFullYear())
+                            button.btn.btn-primary(type="submit") Create User
+                        .collapse#edituser(data-parent="#b")
+                            lead Users List
+                            #datazone
+
 include scripts
 script(type="text/javascript",src="../js/views-js/admin.js")

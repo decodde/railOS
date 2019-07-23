@@ -1,118 +1,57 @@
 include top
 
-.wrapper
-  .sidebar(data-color='azure' data-background-color='white' data-image='../images/tr1.png')
-    //
-      Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
-      Tip 2: you can also add an image using data-image tag
-    .logo
-      a.simple-text.logo-normal
-        | Welcome #{lastname}
-    .sidebar-wrapper.ps-container.ps-theme-default(data-ps-id='729e444c-3cc6-9ec2-88b4-d964b6cd0b8a')
-      form.navbar-form
-        span.bmd-form-group
-          .input-group.no-border
-            input.form-control(type='text' value='' placeholder='Search...')
-            button.btn.btn-white.btn-round.btn-just-icon(type='submit')
-              i.material-icons search
-              .ripple-container
-      ul.nav
-        if role=="admin"|role=="ds"|role=="editor"
-            li.nav-item.active.priceb
-            a.nav-link#priceb(href="/dashboard")
-                i.material-icons dashboard
-                p Dashboard
-        li.nav-item.active.priceb
-          a.nav-link
-            i.material-icons dashboard
-            p New Travel
-      .ps-scrollbar-x-rail(style='left: 0px; bottom: 0px;')
-        .ps-scrollbar-x(tabindex='0' style='left: 0px; width: 0px;')
-      .ps-scrollbar-y-rail(style='top: 0px; right: 0px;')
-        .ps-scrollbar-y(tabindex='0' style='top: 0px; height: 0px;')
-    .sidebar-background(style='background-image: url(../assets/img/sidebar-1.jpg) ')
-  .main-panel.ps-container.ps-theme-default(data-ps-id='34572a16-51b8-c89e-557c-35aee30545f7')
-    // Navbar
-    nav.navbar.navbar-expand-lg.navbar-transparent.navbar-absolute.fixed-top
-      .container-fluid
-        .navbar-wrapper
-          p.navbar-brand railOS
-        button.navbar-toggler.toggled(type='button' data-toggle='collapse' aria-controls='navigation-index' aria-expanded='false' aria-label='Toggle navigation')
-          span.sr-only Toggle navigation
-          span.navbar-toggler-icon.icon-bar
-          span.navbar-toggler-icon.icon-bar
-          span.navbar-toggler-icon.icon-bar
-        .collapse.navbar-collapse.justify-content-end
-          ul.navbar-nav
-            li
-                p.name #{lastname} #{firstname}
-            li.nav-item.dropdown
-              a#navbarDropdownProfile.nav-link(href='#pablo' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
-                i.material-icons person
-                p.d-lg-none.d-md-block
-                  | Account
-                .ripple-container
-              .dropdown-menu.dropdown-menu-right(aria-labelledby='navbarDropdownProfile')
-                a.dropdown-item(href='#') Profile
-                a.dropdown-item(href='#') Settings
-                .dropdown-divider
-                a.dropdown-item(onclick="logout()") Log out
-    .content
-        .container-fluid
-            .row
-                .card
-                    .card-header.card-header-primary.card-header-text
-                        .card-text
-                            h3.card-title
-                                | New Travel
-                    form.card-body
-                        div.row(style='padding:10px')
-                            div.bmd-form-group.form-group.col-md-4
-                                label.bmd-label-floating Firstname
-                                input.form-control#fname(type="text" required)
-                            div.bmd-form-group.form-group.col-md-4
-                                label.bmd-label-floating Lastname
-                                input.form-control#lname(type="text" required)
+header.navbar.navbar-expand.navbar-dark.flex-column.flex-md-row.bg-dark
+    code.navbar-brand.mr-0.mr-md-2(href="#") railOS
+    ul.navbar-nav.flex-row.ml-md-auto.d-none.d-md-flex
+        li.nav-item.dropdown
+            a.nav-item.nav-link.dropdown-toggle.mr-md-2(href="#",id="options",data-toggle="dropdown",aria-haspopup="true",aria-expanded="false") #{lastname}
+            div.dropdown-menu.dropdown-menu-right(aria-labelledby="options")
+                a.dropdown-item Logout
 
-                        div.row(style="padding:10px")
-                            div.bmd-form-group.form-group.col-md-3
-                                label.bmd-label-floating Trip Origin
-                                div.dropdown.bootstrap-select
-                                    select#ostation.form-control(data-style='btn btn-link')
-                                        option IB
-                            div.bmd-form-group.form-group.col-md-3
-                                label.bmd-label-floating Trip Destination
-                                div.dropdown.bootstrap-select
-                                    select#dstation.form-control(data-style='btn btn-link')
-                                        option IB
-                            div.bmd-form-group.form-group.col-md-3
-                                label.bmd-label-floating Ticket Type
-                                div.dropdown.bootstrap-select
-                                    select#ticketclass.form-control(data-style='btn btn-link')
-                                        option Sleeper
-                                        option First Class
-                                        option Second Class
-                        div.row(style="padding:10px")
-                            div.bmd-form-group.form-group.col-md-5
-                                label.bmd-label-floating Reason for travel
-                                input.form-control#reason(type="text" required)
-    .footer
-      .container-fluid
-        nav.float-left
-          ul
-            li
-              a
-                | railOS
-            li
-              a(href='https://geniuscreations.ga/railos')
-                | powered by genius creations
-        .copyright.float-right
-          | &copy;
-          script.
-            document.write(new Date().getFullYear())
-    .ps-scrollbar-x-rail(style='left: 0px; bottom: 0px;')
-      .ps-scrollbar-x(tabindex='0' style='left: 0px; width: 0px;')
-    .ps-scrollbar-y-rail(style='top: 0px; right: 0px;')
-      .ps-scrollbar-y(tabindex='0' style='top: 0px; height: 0px;')
-    .close-layer.visible
+.container-fluid
+    .row.flex-xl-nowrap
+        .card.card-body.col-sm-3.col-md-3.col-xl-2.bg-dark(style="margin-bottom:0px !important;border-radius:0px !important")
+            if role=="admin"|role=="ds"|role=="editor"
+              a.btn.btn-outline-info.text-info(href="/dashboard") Dashboard
+              br
+            a.btn.btn-outline-info.text-info(data-toggle="collapse",data-target="#newtravel",aria-expanded="false",aria-control="newtravel") New Travel
+        
+        main.col-sm-9.col-md-9.col-xl-8.py-md-3.pl-md-5.bg-white(role="main")
+          .card
+            .card-header.card-header-primary.card-header-text
+                .card-text
+                    h3.card-title
+                        | New Travel
+            form.card-body
+                div.row(style='padding:10px')
+                    div.bmd-form-group.form-group.col-md-4
+                        label.bmd-label-floating Firstname
+                        input.form-control#fname(type="text" required)
+                    div.bmd-form-group.form-group.col-md-4
+                        label.bmd-label-floating Lastname
+                        input.form-control#lname(type="text" required)
+
+                div.row(style="padding:10px")
+                    div.bmd-form-group.form-group.col-md-3
+                        label.bmd-label-floating Trip Origin
+                        div.dropdown.bootstrap-select
+                            select#ostation.form-control(data-style='btn btn-link')
+                                option IB
+                    div.bmd-form-group.form-group.col-md-3
+                        label.bmd-label-floating Trip Destination
+                        div.dropdown.bootstrap-select
+                            select#dstation.form-control(data-style='btn btn-link')
+                                option IB
+                    div.bmd-form-group.form-group.col-md-3
+                        label.bmd-label-floating Ticket Type
+                        div.dropdown.bootstrap-select
+                            select#ticketclass.form-control(data-style='btn btn-link')
+                                option Sleeper
+                                option First Class
+                                option Second Class
+                div.row(style="padding:10px")
+                    div.bmd-form-group.form-group.col-md-5
+                        label.bmd-label-floating Reason for travel
+                        input.form-control#reason(type="text" required)
+   
 include scripts

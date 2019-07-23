@@ -91,9 +91,9 @@ app.get("/customerdashboard",function(req,res){
 
 ####################################################################################|
 ###################################################################################*/
-app.get("/editor",function(req,res){
+app.get("/frontdesk",function(req,res){
     if(req.session&&/^(?:frontdesk|editor|admin|ds)$/.test(req.session.role)){
-        res.render("editor",{role:req.session.role,firstname:req.session.firstname,lastname:req.session.lastname})
+        res.render("frontdesk",{role:req.session.role,firstname:req.session.firstname,lastname:req.session.lastname})
     }
     else res.render("401")
 })

@@ -1,99 +1,23 @@
 include top
 
-.wrapper
-  .sidebar(data-color='azure' data-background-color='white')
-    //
-      Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
-      Tip 2: you can also add an image using data-image tag
-    .logo
-      a.simple-text.logo-normal
-        | Welcome #{lastname}
-    .sidebar-wrapper.ps-container.ps-theme-default(data-ps-id='729e444c-3cc6-9ec2-88b4-d964b6cd0b8a')
-      form.navbar-form
-        span.bmd-form-group
-          .input-group.no-border
-            input.form-control(type='text' value='' placeholder='Search...')
-            button.btn.btn-white.btn-round.btn-just-icon(type='submit')
-              i.material-icons search
-              .ripple-container
-      ul.nav
-        if role=="admin"
-            li.nav-item.active.priceb
-            a.nav-link#priceb(href="/dashboard")
-                i.material-icons dashboard
-                p Dashboard
-        li.nav-item.active.priceb
-          a.nav-link
-            i.material-icons dashboard
-            p Customer Query
-        li.nav-item.scheduleb
-          a.nav-link(href="/editor")
-            i.material-icons content_paste
-            p Editor Page
-        li.nav-item.traintrackb
-          a.nav-link(href="/customer")
-            i.material-icons location_ons
-            p Customer Page
-      .ps-scrollbar-x-rail(style='left: 0px; bottom: 0px;')
-        .ps-scrollbar-x(tabindex='0' style='left: 0px; width: 0px;')
-      .ps-scrollbar-y-rail(style='top: 0px; right: 0px;')
-        .ps-scrollbar-y(tabindex='0' style='top: 0px; height: 0px;')
-  .main-panel.ps-container.ps-theme-default(data-ps-id='34572a16-51b8-c89e-557c-35aee30545f7')
-    // Navbar
-    nav.navbar.navbar-expand-lg.navbar-transparent.navbar-absolute.fixed-top
-      .container-fluid
-        .navbar-wrapper
-          p.navbar-brand railOS
-        button.navbar-toggler.toggled(type='button' data-toggle='collapse' aria-controls='navigation-index' aria-expanded='false' aria-label='Toggle navigation')
-          span.sr-only Toggle navigation
-          span.navbar-toggler-icon.icon-bar
-          span.navbar-toggler-icon.icon-bar
-          span.navbar-toggler-icon.icon-bar
-        .collapse.navbar-collapse.justify-content-end
-          ul.navbar-nav
-            li
-                p.name #{lastname} #{firstname}
-            li.nav-item.dropdown
-              a#navbarDropdownProfile.nav-link(href='#pablo' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
-                i.material-icons person
-                p.d-lg-none.d-md-block
-                  | Account
-                .ripple-container
-              .dropdown-menu.dropdown-menu-right(aria-labelledby='navbarDropdownProfile')
-                a.dropdown-item(href='#') Profile
-                a.dropdown-item(href='#') Settings
-                .dropdown-divider
-                a.dropdown-item(onclick="logout()") Log out
-    // End Navbar
-    .content
-        .container-fluid
-            .row(style="display:block;visbility:hidden;z-index:0")
-                .card.card-stats
-                    .card-header.card-header-success
-                        h3.card-title
-                            | Customer Query
-                    .card-body
-                        div
-                            a(href="/customer-query") Go to Query Page
-    .footer
-      .container-fluid
-        nav.float-left
-          ul
-            li
-              a
-                | railOS
-            li
-              a(href='https://geniuscreations.ga/railos') genius creations
-        .copyright.float-right
-          | &copy;
-          script.
-            document.write(new Date().getFullYear())
-    .ps-scrollbar-x-rail(style='left: 0px; bottom: 0px;')
-      .ps-scrollbar-x(tabindex='0' style='left: 0px; width: 0px;')
-    .ps-scrollbar-y-rail(style='top: 0px; right: 0px;')
-      .ps-scrollbar-y(tabindex='0' style='top: 0px; height: 0px;')
-    .close-layer.visible
+header.navbar.navbar-expand.navbar-dark.flex-column.flex-md-row.bg-dark
+    code.navbar-brand.mr-0.mr-md-2(href="#") railOS
+    ul.navbar-nav.flex-row.ml-md-auto.d-none.d-md-flex
+        li.nav-item.dropdown
+            a.nav-item.nav-link.dropdown-toggle.mr-md-2(href="#",id="options",data-toggle="dropdown",aria-haspopup="true",aria-expanded="false") #{lastname}
+            div.dropdown-menu.dropdown-menu-right(aria-labelledby="options")
+                a.dropdown-item Logout
 
+.container-fluid
+    .row.flex-xl-nowrap
+        .card.card-body.col-sm-3.col-md-3.col-xl-2.bg-dark(style="margin-bottom:0px !important;border-radius:0px !important")
+            if role=="admin"|role=="ds"|role=="editor"
+              a.btn.btn-outline-info.text-info(href="/dashboard") Dashboard
+              br
+            a.btn.btn-outline-info.text-info(data-toggle="collapse",data-target="#newtravel",aria-expanded="false",aria-control="newtravel") New Travel
+        
+        main.col-sm-9.col-md-9.col-xl-8.py-md-3.pl-md-5.bg-white(role="main")
+          .card
 include scripts
 script(type="text/javascript",src="../js/views-js/dspage.js")
 
