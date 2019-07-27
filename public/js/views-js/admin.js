@@ -39,31 +39,6 @@ function noty(from, align,msg,time,type){
       }
   });
 };
-function show(x){
-    $(".ctrl.nav-item.active").toggleClass("active")
-    console.log(x)
-    $("."+x).toggleClass("active")
-	var p=document.getElementById("pricepane")
-	var s=document.getElementById("schedulepane")
-	if(x=="priceb"){
-		s.style.display="none"
-		s.style.visibility="hidden"
-		s.style.zIndex="0"
-		p.style.display="block"
-		p.style.visibility="visible"
-		p.style.zIndex="1"
-	}
-	else if(x=="scheduleb"){
-		p.style.display="none"
-		p.style.visibility="hidden"
-		p.style.zIndex="0"
-		s.style.display="block"
-		s.style.visibility="visible"
-		s.style.zIndex="1"
-	}
-}
-
-
 function getusers(){
     $.get("/getusers",{dta:"p"},(response)=>{
         console.log(response)
@@ -138,3 +113,21 @@ function edit(x,uname,fname,lname,role,station){
   }
 })
 }
+logout=()=>{
+    $.post("/logout",{},(r)=>{r.value?window.location="/":noty(top,right,r.string,1000,"fail")})
+}
+function noty(from, align,msg,time,type){
+
+    $.notify({
+        icon: "add_alert",
+        message: msg
+
+    },{
+        type: type,
+        timer: time,
+        placement: {
+            from: from,
+            align: align
+        }
+    });
+};

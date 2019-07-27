@@ -6,7 +6,7 @@ header.navbar.navbar-expand.navbar-dark.flex-column.flex-md-row.bg-dark
         li.nav-item.dropdown
             a.nav-item.nav-link.dropdown-toggle.mr-md-2(href="#",id="options",data-toggle="dropdown",aria-haspopup="true",aria-expanded="false") #{lastname}
             div.dropdown-menu.dropdown-menu-right(aria-labelledby="options")
-                a.dropdown-item Logout
+                a.dropdown-item(onclick="logout()") Logout
 
 .container-fluid
     .row.flex-xl-nowrap
@@ -55,3 +55,22 @@ header.navbar.navbar-expand.navbar-dark.flex-column.flex-md-row.bg-dark
                         input.form-control#reason(type="text" required)
    
 include scripts
+script(type="text/javascript").
+     logout=()=>{
+        $.post("/logout",{},(r)=>{r.value?window.location="/":noty(top,right,r.string,1000,"fail")})
+    }
+    function noty(from, align,msg,time,type){
+
+        $.notify({
+            icon: "add_alert",
+            message: msg
+
+        },{
+            type: type,
+            timer: time,
+            placement: {
+                from: from,
+                align: align
+            }
+        });
+    };

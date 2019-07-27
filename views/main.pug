@@ -1,16 +1,20 @@
 include top
 
 body.row(style="background:url('../images/gr02.jpg')")
-    div.align-self-center(style="padding:40px;border-radius:5px;float:none;background-color:white;width:300px;margin:0 auto;")
-        h4 Login
-        br
-        form.form(method="POST")
-            div.form-group
-                p.alert.alert-primary#details
-                input.form-control#user(type="text",placeholder="Username",required)
-            div.form-group
-                input.form-control#pwd(type="password",placeholder="Password",required)
-            button.btn.btn-primary(type="submit",onclick="login()") Login
+    if !role
+        div.align-self-center(style="padding:40px;border-radius:5px;float:none;background-color:white;width:300px;margin:0 auto;")
+            h4 Login
+            br
+            form.form(method="POST")
+                div.form-group
+                    p.alert.alert-primary#details
+                    input.form-control#user(type="text",placeholder="Username",required)
+                div.form-group
+                    input.form-control#pwd(type="password",placeholder="Password",required)
+                button.btn.btn-primary(type="submit",onclick="login()") Login
+    if role
+        script(type="text/javascript").
+            window.location="/dashboard"
 include scripts
 script(type="text/javascript").
     $(".form").submit((event)=> {

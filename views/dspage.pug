@@ -6,7 +6,7 @@ header.navbar.navbar-expand.navbar-dark.flex-column.flex-md-row.bg-dark
         li.nav-item.dropdown
             a.nav-item.nav-link.dropdown-toggle.mr-md-2(href="#",id="options",data-toggle="dropdown",aria-haspopup="true",aria-expanded="false") #{lastname}
             div.dropdown-menu.dropdown-menu-right(aria-labelledby="options")
-                a.dropdown-item Logout
+                a.dropdown-item(onclick="logout()") Logout
 
 .container-fluid
     .row.flex-xl-nowrap
@@ -14,10 +14,31 @@ header.navbar.navbar-expand.navbar-dark.flex-column.flex-md-row.bg-dark
             if role=="admin"|role=="ds"|role=="editor"
               a.btn.btn-outline-info.text-info(href="/dashboard") Dashboard
               br
-            a.btn.btn-outline-info.text-info(data-toggle="collapse",data-target="#newtravel",aria-expanded="false",aria-control="newtravel") New Travel
-        
+            a.btn.btn-outline-info.text-info(data-toggle="collapse",data-target="#custquery",aria-expanded="false",aria-control="custquery") Customer Query
+            br
+            a.btn.btn-outline-info.text-info(href="/train-track") Train Tracking
+            br
         main.col-sm-9.col-md-9.col-xl-8.py-md-3.pl-md-5.bg-white(role="main")
-          .card
+          .card.card-body
+            .collapse#custquery
+                    div.card
+                        div.card-header
+                            h3 Customer Query
+                        div.card-body
+                            form.search
+                                div.row
+                                    div.form-group.col-md-4
+                                        label Search by
+                                        select.col-md-6#station.form-control(data-style='btn btn-link')
+                                            option Name
+                                            option Station
+                                            option Trip Destination
+                                            option Trip Orgination
+                                    .form-group.col-md-4
+                                        label Search term
+                                        input#searchterm.form-control(type="text")
+                                button.btn.btn-primary(type="submit") Query
 include scripts
 script(type="text/javascript",src="../js/views-js/dspage.js")
+    
 
