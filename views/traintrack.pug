@@ -30,8 +30,10 @@
                     <div id="board-tools">
                         <div id="board-actions">
                             <ul class="board-toolbar vertical">
-                                <li onclick="saveDboard()"><i id="full-screen-icon" class="icon-download-alt icon-white"></i><label id="full-screen">Save board to Database</label></li>
-                            
+                                <li>
+                                    <span onclick="saveDboard()"><i id="full-screen-icon" class="icon-download-alt icon-white"></i><label id="">Save board to Database</label></span>&nbsp;&nbsp;
+                                    <span onclick="loadDboard()"><i id="full-screen-icon" class="icon-folder-open icon-white"></i><label id="full-screen">Load board from Database</label></span>
+                                </li>
                                 <li data-bind="click: loadDashboardFromLocalFile"><i id="full-screen-icon" class="icon-folder-open icon-white"></i><label id="full-screen">Load board</label></li>
                                 <li><i class="icon-download-alt icon-white"></i>
                                     <label data-bind="click: saveDashboardClicked">Save board</label>
@@ -75,7 +77,6 @@
                     </div>
                 </div>
             </div>
-            br
         <div id="column-tools" class="responsive-column-width">
             <ul class="board-toolbar left-columns">
                 <li class="column-tool add" data-bind="click: addGridColumnLeft"><span class="column-icon right"></span><i class="icon-arrow-left icon-white"></i></li>
@@ -122,6 +123,7 @@
                 "../lib/js/freeboard/freeboard.js",
                 "../plugins/freeboard/freeboard.datasources.js",
                 "../plugins/freeboard/freeboard.widgets.js",
+                
                 "../js/bootstrap-notify.js",
                 function(){
                     $(function()
@@ -196,16 +198,23 @@ if !role|role!="admin"
         </li>
 if role=="admin"
     script(type="text/javascript").
+        loadDboard=()=>{$.get("/train-track/load/dashboard",{},(r)=>{freeboard.loadDashboard(r)})}
         saveDboard=()=>{
             var a=freeboard.serialize()
             a.panes.length==0?alert("Dashboard has not been configured"):a
             console.log(a)
-            $.post("/train-track/savedashboard/for/locono",)
+            $.post("/train-track/savedashboard",{db:a},(r)=>{
+                alert(r.string)
+            })
         }
 script(type="text/javascript").
-    window.onload=function(){
-        $.get("/train-track/getdashboard/"+#{db.locono},(jkf)=>{freeboard.loadDashboard(jkf,false)})
+    gettrain=()=>{
+        $.post("/train-track/50",(jkf)=>{freeboard.loadDashboard(jkf,false);freeboard.initialize(true)})
     }
-    
+    window.onload=function(){gettrain()}
+script(src="../lib/js/thirdparty/jquery.js")
+script(src="../plugins/thirdparty/raphael.2.1.0.min.js")
+script(src="../plugins/thirdparty/justgage.1.0.1.js")
+script(src="../plugins/thirdparty/jquery.sparkline.min.js")
 </body>
 </html>
