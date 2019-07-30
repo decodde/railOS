@@ -4255,7 +4255,7 @@ freeboard.loadDatasourcePlugin({
 
             paper = Raphael($(element).get()[0], width, height);
             var circle = paper.circle(width / 2, height / 2, radius);
-            circle.attr("stroke", "#FF9900");
+            circle.attr("stroke", "#17a2b8");
             circle.attr("stroke-width", strokeWidth);
 
             triangle = paper.path(polygonPath([width / 2, (height / 2) - radius + strokeWidth, 15, 20, -30, 0]));

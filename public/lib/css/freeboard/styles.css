@@ -768,7 +768,7 @@ a:focus {
 }
 
 .gridster header {
-	background-color: #272727;
+	background-color: #343a40;
 	height: 30px;
 	margin: 0;
 	padding: 0 10px 0 10px;
@@ -1027,7 +1027,7 @@ ul, ol {
 }
 
 .gridster .gs_w {
-	background: #2a2a2a;
+	background: #343a40;
 	padding: 0px;
 	margin: 0px;
 	overflow: hidden;
@@ -1043,7 +1043,7 @@ ul, ol {
 .gridster .preview-holder {
 	border: none !important;
 	border-radius: 0 !important;
-	background: rgba(255, 255, 255, .2) !important;
+	background: #343a40 !important;
 }
 
 [class^="icon-"],
