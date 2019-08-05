@@ -379,8 +379,16 @@ app.get("/train-track/load/dashboard",(req,res)=>{
     else res.send("Not authorized")
     
 })
-
+/*dev*
 app.listen(process.env.PORT||80,"127.168.10.11",function(){
           console.log("_._._._🚂-[¤ ¤]-[¤ ¤ ¤]-[¤ ¤ ¤]-[¤ ¤ ¤]_._ ______ railOS server running ")
 }
 )
+*/
+
+/*prod*/
+app.listen(process.env.PORT||3000,function(){
+          console.log("_._._._🚂-[¤ ¤]-[¤ ¤ ¤]-[¤ ¤ ¤]-[¤ ¤ ¤]_._ ______ railOS server running ")
+}
+)
+/**/
