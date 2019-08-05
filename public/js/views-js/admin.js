@@ -12,13 +12,12 @@ $(".createuser").submit(function(event) {
                         station:$('.createuser #station').val()},
                         function(response){
                             if(!response.value){
-
                                 noty("top","right",response.string,"3000","fail")
-                                console.log(response.string)
+                                    console.log(response.string)
                                 }
                             else if(response.value){
                                 noty("top","right",response.string,"3000","success")
-                                console.log(response.string)
+                                    console.log(response.string)
                             }
                 })
 

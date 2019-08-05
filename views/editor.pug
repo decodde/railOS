@@ -18,6 +18,8 @@ header.navbar.navbar-expand.navbar-dark.flex-column.flex-md-row.bg-dark
             br
             a.btn.btn-outline-info.text-info(data-toggle="collapse",data-target="#mgschedule",aria-expanded="false",aria-control="mgschedule") Manage Schedule
             br
+            a.btn.btn-outline-info.text-info(data-toggle="collapse",data-target="#tmanifest",aria-expanded="false",aria-control="tmanifest") Train Manifest
+            br
             a.btn.btn-outline-info.text-info(href="/frontdesk") Frontdesk Page
             br
             a.btn.btn-outline-info.text-info(href="/customerdashboard") Customer Page
@@ -29,6 +31,11 @@ header.navbar.navbar-expand.navbar-dark.flex-column.flex-md-row.bg-dark
             .card.card-body#pt
                 .collapse#mgprice(data-parent="#pt")
                 .collapse#mgschedule(data-parent="#pt")
+                .collapse#tmanifest(data-parent="#pt")
+                    a.btn.btn-outline-info.text-info(data-toggle="collapse",data-target="#mgprice",aria-expanded="false",aria-control="mgprice") Manage Pricing
+                    br
+                    a.btn.btn-outline-info.text-info(data-toggle="collapse",data-target="#mgschedule",aria-expanded="false",aria-control="mgschedule") Manage Schedule
+                    br
 
 
 include scripts

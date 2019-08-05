@@ -93,11 +93,7 @@ app.get("/dashboard",(req,res)=>{
         firstname:req.session.firstname,
         lastname:req.session.lastname
     }
-    if(req.session&&req.session.userId){
-        res.render("dashboard",dt)
-
-    }
-    else res.render("401")
+    req.session&&req.session.userId?res.render("dashboard",dt):res.render("401")
 })
 
 
@@ -112,10 +108,7 @@ app.get("/dashboard",(req,res)=>{
 ####################################################################################|
 ###################################################################################*/
 app.get("/customerdashboard",function(req,res){
-    if(req.session&&/^(?:customer|ds|admin|editor|frontdesk)$/.test(req.session.role)){
-        res.render("customer",{role:req.session.role,firstname:req.session.firstname,lastname:req.session.lastname})
-    }
-    else res.render("401")
+    req.session&&/^(?:customer|ds|admin|editor|frontdesk)$/.test(req.session.role)? res.render("customer",{role:req.session.role,firstname:req.session.firstname,lastname:req.session.lastname}):res.render("401")
 })
 
 
@@ -334,13 +327,9 @@ app.post("/upduser",(req,res)=>{
 
 ####################################################################################|
 ###################################################################################*/
+
 app.get("/train-track",(req,res)=>{
-    
-    var dt={
-        role:req.session.role,
-        firstname:req.session.firstname,
-        lastname:req.session.lastname,
-    }
+    var dt=dbprocess.getSess(req)
     res.render("traintrack",dt)
 })
 ///////////////////////////////////////////////////////////////////////////////////////////
