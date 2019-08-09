@@ -20,14 +20,16 @@ header.navbar.navbar-expand.navbar-dark.flex-column.flex-md-row.bg-dark
             
         main.col-sm-9.col-md-9.col-xl-8.py-md-3.pl-md-5.bg-white(role="main")
             .card.card-body#pt
-                .collapse#mgusers(data-parent="#pt")
+                .collapse.show#mgusers(data-parent="#pt")
                     row
                         a.col-md-3.btn.btn-outline-info.text-info(data-toggle="collapse",data-target="#createuser",aria-expanded="false",aria-control="createuser") Create User
                         a.col.col-md-offset-1.col-md-3.btn.btn-outline-info.text-info(onclick="getusers()",data-toggle="collapse",data-target="#edituser",aria-expanded="false",aria-control="#edituser") Edit User(s)
                     br
                     br
                     .card.card-body#b
-                        form.collapse#createuser(data-parent="#b")
+                        
+                        form.collapse.show#createuser(data-parent="#b")
+                            h3.display-4 Add User(s)
                             div.row
                                 div.bmd-form-group.form-group.col-md-3
                                     label.bmd-label-floating Username
@@ -65,7 +67,7 @@ header.navbar.navbar-expand.navbar-dark.flex-column.flex-md-row.bg-dark
                             br
                             button.btn.btn-primary(type="submit") Create User
                         .collapse#edituser(data-parent="#b")
-                            lead Users List
+                            h3.display-4 Edit user
                             #datazone
 
 include scripts
