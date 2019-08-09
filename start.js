@@ -364,7 +364,15 @@ app.post("/train-track/save/dashboard",(req,res)=>{
     }
     else res.send("Not authorized")
 })
-
+app.get("/customerquery/:var/:val",(req,res)=>{
+    var a=dbprocess.processQuery(req.params.var,req.params.val)
+    res.send(a)
+})
+app.get("/customerquery/:var/:val/:extra/",(req,res)=>{
+    const{vars,vals,extra}=req.params
+    var a=dbprocess.processQuery(vars,vals,extra)
+    res.send(a)
+})
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 app.get("/train-track/getdashboard/for/:locono",(req,res)=>{
     var x=dbprocess.getDash(req.params.locono)
@@ -379,14 +387,14 @@ app.get("/train-track/load/dashboard",(req,res)=>{
     else res.send("Not authorized")
     
 })
-/*dev*
-app.listen(process.env.PORT||80,"127.168.10.11",function(){
+/*dev*/
+app.listen(80,"127.168.10.11",function(){
           console.log("_._._._🚂-[¤ ¤]-[¤ ¤ ¤]-[¤ ¤ ¤]-[¤ ¤ ¤]_._ ______ railOS server running ")
 }
 )
-*/
+/*/
 
-/*prod*/
+/*prod*
 app.listen(process.env.PORT||3000,function(){
           console.log("_._._._🚂-[¤ ¤]-[¤ ¤ ¤]-[¤ ¤ ¤]-[¤ ¤ ¤]_._ ______ railOS server running ")
 }
