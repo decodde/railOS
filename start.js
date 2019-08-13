@@ -364,13 +364,12 @@ app.post("/train-track/save/dashboard",(req,res)=>{
     }
     else res.send("Not authorized")
 })
-app.get("/customerquery/:var/:val",(req,res)=>{
-    var a=dbprocess.processQuery(req.params.var,req.params.val)
+app.get("/customerquery/:vars/:val",(req,res)=>{
+    var a=dbprocess.processQuery(req.params)
     res.send(a)
 })
-app.get("/customerquery/:var/:val/:extra/",(req,res)=>{
-    const{vars,vals,extra}=req.params
-    var a=dbprocess.processQuery(vars,vals,extra)
+app.get("/customerquery/:vars2/:val/:cmd(with|without)/:varso/:val2",(req,res)=>{
+    var a=dbprocess.processQuery(req.params)
     res.send(a)
 })
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
