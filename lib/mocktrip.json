@@ -6,37 +6,86 @@
             {
                 "tripOrigin":"lg",
                 "tripDestination":"kl",
-                "ticketType":"sleeper",
+                "tripTicketType":"sleeper",
                 "tripDate":"2019-08-05"
             },
             {
                 "tripOrigin":"mn",
                 "tripDestination":"gb",
-                "ticketType":"sleeper",
+                "tripTicketType":"sleeper",
+                "tripDate":"2019-07-09"
+            }
+        ]
+    },
+    {
+        "firstname":"tiny",
+        "lastname":"elvis",
+        "trips":[
+            {
+                "tripOrigin":"lon",
+                "tripDestination":"kl",
+                "tripTicketType":"firstclass",
+                "tripDate":"2019-08-05"
+            },
+            {
+                "tripOrigin":"po",
+                "tripDestination":"gb",
+                "tripTicketType":"sleeper",
+                "tripDate":"2019-07-09"
+            },
+            {
+                "tripOrigin":"lon",
+                "tripDestination":"kl",
+                "tripTicketType":"secondclass",
+                "tripDate":"2019-08-05"
+            },
+            {
+                "tripOrigin":"po",
+                "tripDestination":"gb",
+                "tripTicketType":"sleeper",
                 "tripDate":"2019-07-09"
             }
         ]
     },
     {
         "firstname":"galileo",
+        
         "lastname":"galilei",
         "trips":[
             {
                 "tripOrigin":"gb",
-                "tripDestination":"kt",
-                "ticketType":"sleeper",
+                "tripDestination":"kl",
+                "tripTicketType":"sleeper",
                 "tripDate":"2019-08-05"
             },
             {
-                "tripOrigin":"ng",
+                "tripOrigin":"lg",
                 "tripDestination":"ib",
-                "ticketType":"sleeper",
+                "tripTicketType":"sleeper",
                 "tripDate":"2019-08-05"
             },
             {
                 "tripOrigin":"ib",
                 "tripDestination":"kd",
-                "ticketType":"sleeper",
+                "tripTicketType":"firstclass",
+                "tripDate":"2019-07-09"
+            },
+            {
+                "tripOrigin":"lon",
+                "tripDestination":"kl",
+                "tripTicketType":"secondclass",
+                "tripDate":"2019-08-05"
+            },
+            {
+                "tripOrigin":"lg",
+                "tripDestination":"ib",
+                "tripTicketType":"secondclass",
+                "tripDate":"2019-08-05"
+            },
+            {
+                "tripOrigin":"ib",
+                "tripDestination":"js",
+                "tripTicketType":"firstclass",
                 "tripDate":"2019-07-09"
             }
         ]
