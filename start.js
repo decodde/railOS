@@ -26,12 +26,7 @@ app.use(session({
 app.use(express.static(__dirname+"/public"))
 app.set('views',__dirname+"/views")
 app.set('view engine',  'pug');
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "herokuapp.com"); // update to match the domain you will make the request from
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  
-  next();
-});
+
 app.get("/",function(req,res){
     var dt={
         role:req.session.role,
@@ -70,14 +65,14 @@ app.post("/login",function(req,res){
     data=JSON.parse(data)
     var ind=data.findIndex(o=>o.username==req.body.username)
     if(ind!=-1) {
-        if(data[ind].password==req.body.password)
+        if(data[ind].password==req.body.password) 
         {req.session.role=data[ind].role
             req.session.userId=data[ind].username
             req.session.firstname=data[ind].firstname
             req.session.lastname=data[ind].lastname
             //console.log("login ass: "+req.session.role)
             res.send({value:true,string:"Success"})
-        }
+        } 
         else res.send({string:"failed",value:false})
     }
     else res.send({string:"failed",value:false})
@@ -208,7 +203,7 @@ app.post("/customer-query",function(req,res){
             if(err) console.log(err)
             if(data&&data.length>=0){
                  res.send(data)
-            }
+            }     
         })
     }
     else res.render("401")
@@ -339,18 +334,18 @@ app.get("/train-track",(req,res)=>{
 })
 ///////////////////////////////////////////////////////////////////////////////////////////
 app.get("/train-track/edit",(req,res)=>{
-
+    
     var dt={
         role:req.session.role,
         firstname:req.session.firstname,
         lastname:req.session.lastname,
     }
     req.session.role=="admin"?res.render("traintrackedit",dt):res.render("401")
-
+    
 })
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 app.post("/train-track/:locono",(req,res)=>{
-
+    
     var dt={
         role:req.session.role,
         firstname:req.session.firstname,
@@ -389,16 +384,16 @@ app.get("/train-track/load/dashboard",(req,res)=>{
         res.json(x)
     }
     else res.send("Not authorized")
-
+    
 })
-/*dev*
+/*dev*/
 app.listen(80,"127.168.10.11",function(){
           console.log("_._._._🚂-[¤ ¤]-[¤ ¤ ¤]-[¤ ¤ ¤]-[¤ ¤ ¤]_._ ______ railOS server running ")
 }
 )
 /*/
 
-/*prod*/
+/*prod*
 app.listen(process.env.PORT||3000,function(){
           console.log("_._._._🚂-[¤ ¤]-[¤ ¤ ¤]-[¤ ¤ ¤]-[¤ ¤ ¤]_._ ______ railOS server running ")
 }
