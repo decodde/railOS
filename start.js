@@ -12,7 +12,6 @@ var dbprocess=require("./lib/dbprocess")
 /*
 mongo.connect(mongodbURL,function(err,db0){
     db=db0.db("railos");
-
     dbusers=db.collection("users");
 })
 */
@@ -195,25 +194,7 @@ app.get("/ds",function(req,res){
 
 })
 
-///////   customer query //////////////////////////
-app.post("/customer-query",function(req,res){
-    if(req.session&&/^(?:admin|ds)$/.test(req.session.role)){
-        dbusers.find(req.body,{_id:0, password:0}).toArray((err,data)=>{
-            console.log(data)
-            if(err) console.log(err)
-            if(data&&data.length>=0){
-                 res.send(data)
-            }     
-        })
-    }
-    else res.render("401")
-})
-app.get("/customer-query",(req,res)=>{
-    if(req.session&&/^(?:admin|ds)$/.test(req.session.role)){
-        res.render("customerquery",{role:req.session.role,firstname:req.session.firstname,lastname:req.session.lastname})
-    }
-    else res.render("401")
-})
+
 app.get("/trainschedule",function(req,res){
 
 })
@@ -240,6 +221,7 @@ app.get("/admin",function(req,res){
     }
     else res.render("401")
 })
+/* dev
 //////   getusers  ///////////////////////////////
 app.get("/getusers",function(req,res){
     if(req.session&&(req.session.role=="admin"||"ds")){
@@ -317,7 +299,7 @@ app.post("/upduser",(req,res)=>{
 }
 )
 
-
+*/
 
 //#TODO: ADD TRAINTRACK ENDPOINT
 /*##################################################################################|
@@ -386,14 +368,14 @@ app.get("/train-track/load/dashboard",(req,res)=>{
     else res.send("Not authorized")
     
 })
-/*dev*
+/*dev*/
 app.listen(80,"127.168.10.11",function(){
           console.log("_._._._🚂-[¤ ¤]-[¤ ¤ ¤]-[¤ ¤ ¤]-[¤ ¤ ¤]_._ ______ railOS server running ")
 }
 )
 /*/
 
-/*prod*/
+/*prod*
 app.listen(process.env.PORT||3000,function(){
           console.log("_._._._🚂-[¤ ¤]-[¤ ¤ ¤]-[¤ ¤ ¤]-[¤ ¤ ¤]_._ ______ railOS server running ")
 }
