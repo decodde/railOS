@@ -1,3 +1,4 @@
+
 $(".createuser").submit(function(event) {
     // Stop the browser from submitting the form.
     event.preventDefault();
@@ -22,25 +23,60 @@ $(".createuser").submit(function(event) {
                 })
 
 });
+var getLocomotives=()=>{
+    console.log("here")
+    $.get("/getLocomotives",{},(r)=>{
+        if(r.length>0){
+            $(".locoData").empty()
+            r.forEach(loco => {
+                $(".locoData").append(`<div class="card card-body">
+                                            <h1 class="float-right ">${loco.locomotiveNumber}</h1>
+                                            <div class="right">
+                                                <span onclick="deleteLocomotive(${loco.locomotiveNumber})" class="btn btn-warning">Delete</span>
+                                        </div
+                                     `)
+            });
+        }
+        else if(r.length==0){
+            $(".locoData").empty()
+            $(".locoData").append(`<p class="lead">Locomotives data non-existent</p>`)
+        }
+        else if(r.length==undefined) {
+            $(".locoData").empty()
+            $(".locoData").append(`<p class="lead">${r.message}</p>`)
+        }
+        
 
+    })
+}
+deleteLocomotive=(locomotiveNumber)=>{
+    $.post(`/deleteLocomotive/${locomotiveNumber}`,{},(r)=>{
+        r?noty("top","right",r.message,2000,"success"):r
+    })
+}
+$("#createloco").submit((e)=>{
+    e.preventDefault()
+    var data={}
+    var all=$("#createloco .form-control")
+    for(var x=0;x<all.length;x++){
+        var rm=all[x].id
+        data[rm]=all[x].value
+    }
+    $.post(`/createLocomotive/${data.locomotiveNumber}`,data,(r)=>{
+        noty("top","right",r.message,2000,"success")
+    })
+})
 function noty(from, align,msg,time,type){
-
-  $.notify({
-      icon: "add_alert",
-      message: msg
-
-  },{
-      type: type,
-      timer: time,
-      placement: {
-          from: from,
-          align: align
-      }
-  });
-};
+  $.notify({icon: "add_alert", message: msg},{ type: type, timer: time,
+            placement: {
+                from: from,
+                align: align
+            }
+        });
+    };
 function getusers(){
     $.get("/getusers",{dta:"p"},(response)=>{
-        console.log(response)
+        //console.log(response)
         if(response.value){
             if(response.data.length>0){
                 $("#datazone").empty()
@@ -115,18 +151,3 @@ function edit(x,uname,fname,lname,role,station){
 logout=()=>{
     $.post("/logout",{},(r)=>{r.value?window.location="/":noty(top,right,r.string,1000,"fail")})
 }
-function noty(from, align,msg,time,type){
-
-    $.notify({
-        icon: "add_alert",
-        message: msg
-
-    },{
-        type: type,
-        timer: time,
-        placement: {
-            from: from,
-            align: align
-        }
-    });
-};

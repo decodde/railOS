@@ -58,8 +58,8 @@ header.navbar.navbar-expand.navbar-dark.flex-column.flex-md-row.bg-dark
 include scripts
 script(type="text/javascript").
      logout=()=>{
-        $.post("/logout",{},(r)=>{r.value?window.location="/":noty(top,right,r.string,1000,"fail")})
-    }
+        $.post("/logout",{},(r)=>{ r.value?window.location="/":noty("top","right",r.string,1500,"fail")})
+     }
     function noty(from, align,msg,time,type){
 
         $.notify({

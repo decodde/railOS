@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node start.js"
   },
-  "author": "Fasina Oreoluwa",
+  "author": "Fasina Oreoluwa",  
   "license": "ISC",
   "dependencies": {
     "basic-auth": "^2.0.1",
