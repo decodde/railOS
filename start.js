@@ -1,8 +1,8 @@
 var express=require("express")
 var app=express()
 const mongo=require('mongodb').MongoClient
-//const mongodbURL = 'mongodb+srv://railosapp:mongo@railos-vkklb.mongodb.net/test?retryWrites=true';
-const mongodbURL = 'mongodb://localhost:27017/railos';
+const mongodbURL = 'mongodb+srv://railosapp:mongo@railos-vkklb.mongodb.net/test?retryWrites=true';
+//const mongodbURL = 'mongodb://localhost:27017/railos';
 var session=require('express-session')
 var fs=require("fs")
 var path=require("path")
@@ -292,7 +292,7 @@ app.get("/getLocomotives",(req,res)=>{
     else res.json({type:"error",message:"What the f* bro"})
 })
 /*dev*/
-app.listen(80,"127.168.10.11",function(){
+app.listen(process.env.PORT||3000,function(){
           console.log("_._._._🚂-[¤ ¤]-[¤ ¤ ¤]-[¤ ¤ ¤]-[¤ ¤ ¤]_._ ______ railOS server running ")
 }
 )
