@@ -18,6 +18,7 @@ const client = new MongoClient(mongodbURL, { useNewUrlParser: true });
 
 client.connect(err => {
   dbusers = client.db("railOS").collection("users");
+  
   dblocomotives=client.db("railOS").collection("locomotives")
   dbdashboard=client.db("railOS").collection("dashboards")
   console.log("connected")
@@ -44,15 +45,19 @@ app.get("/",function(req,res){
 })
 
 //login
+
 app.post("/login",function(req,res){
-   dbusers.findOne({username:req.body.username}).toArray((err,data)=>{
-       if(data==null) res.send({string:"failed",value:false})
+    console.log(req.body.username)
+
+   dbusers.findOne({username:req.body.username},(err,data)=>{
+    console.log(data)
+       if(data==null) res.send({string:"Invalid username or password",value:false})
        else{
            if(data.password==req.body.password){
-            req.session.role=data[ind].role
-            req.session.userId=data[ind].username
-            req.session.firstname=data[ind].firstname
-            req.session.lastname=data[ind].lastname
+            req.session.role=data.role
+            req.session.userId=data.username
+            req.session.firstname=data.firstname
+            req.session.lastname=data.lastname
             //console.log("login ass: "+req.session.role)
             res.send({value:true,string:"Success"})
            }
@@ -197,15 +202,15 @@ app.post("/train-track/:locono",(req,res)=>{
         lastname:req.session.lastname,
         locono:req.params.locono
     }
-    dbdashboard.findOne({}).toArray((err,data)=>{
+    dbdashboard.findOne({},(err,data)=>{
         if(data==null){
             console.log("No dashboard Found")
             res.json()
         }
         else{
-            data.panes[0].widgets[0].settings.value=no
-            data.datasources[0].settings.url=rd.datasources[0].settings.url+"/"+req.params.no
-            res.json(data)
+            data.panes[0].widgets[0].settings.value=req.params.locono
+            data.datasources[0].settings.url=data.datasources[0].settings.url+"/"+req.params.locono
+            res.json(JSON.stringify(data))
         }
         
     })
@@ -214,7 +219,8 @@ app.post("/train-track/:locono",(req,res)=>{
 ///#TODO: SAVE DASHBOARD
 app.post("/train-track/save/dashboard",(req,res)=>{
     if(req.session.role=="admin"){
-        dbdashboard.update({version:1},req.body.db)
+        var newDash=JSON.parse(req.body.db)
+        dbdashboard.updateOne({version:1},newDash)
         res.send({string:"success",value:true})
     }
     else res.send("Not authorized")
@@ -229,7 +235,7 @@ app.get("/customerquery/:vars/:val/:cmd(and|without)/:vars2/:val2",(req,res)=>{
 })
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 app.get("/train-track/getdashboard/for/:locono",(req,res)=>{
-    dbdashboard.findOne({}).toArray((err,data)=>{
+    dbdashboard.findOne({},(err,data)=>{
         if(data==null){
             console.log("No dashboard Found")
             res.json()
@@ -244,8 +250,8 @@ app.get("/train-track/getdashboard/for/:locono",(req,res)=>{
 
 app.get("/train-track/load/dashboard",(req,res)=>{
     if(req.session.role=="admin"){
-        dbdashboard.findOne({version:1}).toArray((err,data)=>{
-            res.json(data)
+        dbdashboard.findOne({version:1},(err,data)=>{
+            res.json(JSON.stringify(data))
         })
     }
     else res.send("Not authorized")
@@ -254,7 +260,7 @@ app.get("/train-track/load/dashboard",(req,res)=>{
 app.get("/saveLocationData/:locoNo/:locoCode",(req,res)=>{
     var {locoNo,locoCode}=req.params
     var locationData=req.body
-    dblocomotives.findOne({locomotiveNumber:locoNo,locomotiveCode:locoCode}).toArray((err,daa)=>{
+    dblocomotives.findOne({locomotiveNumber:locoNo,locomotiveCode:locoCode},(err,daa)=>{
         if (daa==null)res.json({type:"error",code:"RO_LOCO_EXIST_404",message:"Locomotive does not exist"})
         else{
             dblocomotives.update({locomotiveNumber:locoNo},locationData)
@@ -265,7 +271,7 @@ app.get("/saveLocationData/:locoNo/:locoCode",(req,res)=>{
 app.post("/createLocomotive/:locoNo",(req,res)=>{
     var locoNo=req.params.locoNo
     var locationData=req.body
-    dblocomotives.findOne({locomotiveNumber:locoNo}).toArray((err,daa)=>{
+    dblocomotives.findOne({locomotiveNumber:locoNo},(err,daa)=>{
         if (daa==null){
             dblocomotives.insert(locationData)
             res.json({type:"success",message:`Created Locomotive ${locoNo} Successfully`,code:"RO_LOCO_CREATE_200"})
@@ -275,11 +281,11 @@ app.post("/createLocomotive/:locoNo",(req,res)=>{
 })
 app.post("/deleteLocomotive/:locomotiveNumber",(req,res)=>{
     var locomotiveNumber=req.params.locomotiveNumber
-    dblocomotives.findOne({locomotiveNumber:locomotiveNumber}).toArray((err,daa)=>{
+    dblocomotives.findOne({locomotiveNumber:locomotiveNumber},(err,daa)=>{
         if (data==null)res.json({type:"error",code:"RO_LOCO_EXIST_404",message:"Locomotive does not exist"})
         else{
-            dblocomotives.remove({locomotiveNumber:locoNo})
-            res.json({type:"success",message:`Created Locomotive ${locoNo} Successfully`,code:"RO_LOCO_CREATE_200"})
+            dblocomotives.remove({locomotiveNumber:locomotiveNumber})
+            res.json({type:"success",message:`Deleted Locomotive ${locomotiveNumber} Successfully`,code:"RO_LOCO_DELETE_200"})
         }
     })
 })
