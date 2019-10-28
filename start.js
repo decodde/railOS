@@ -1,8 +1,8 @@
 var express=require("express")
 var app=express()
 const mongo=require('mongodb').MongoClient
-const mongodbURL = 'mongodb+srv://railosapp:mongo@railos-vkklb.mongodb.net/test?retryWrites=true';
-//const mongodbURL = 'mongodb://localhost:27017/railos';
+//const mongodbURL = 'mongodb+srv://railosapp:mongo@railos-vkklb.mongodb.net/test?retryWrites=true';
+const mongodbURL = 'mongodb://localhost:27017/railos';
 var session=require('express-session')
 var fs=require("fs")
 var path=require("path")
@@ -44,6 +44,25 @@ app.get("/",function(req,res){
 		res.render("main",dt)
 })
 
+
+app.post("/saveLocation/:id",(req,res)=>{
+    var newLoc=req.body
+    dblocomotives.findOne({locomotiveNumber:req.params.id},(err,data)=>{
+        if(data==null) res.json({type:"error",msg:"Loco does  not exist"})
+        else{
+            dblocomotives.update({locomotiveNumber:req.params.id},{$push:{location:newLoc}})
+            res.json({type:"success",message:""})
+        }
+    })
+})
+app.get("/lastLocation/:id",(req,res)=>{
+    dblocomotives.findOne({locomotiveNumber:req.params.id},(err,data)=>{
+        if(data==null) res.json({type:"error",msg:"Loco does  not exist"})
+        else{
+            res.json({type:"success",message:"",data:data.location[0]})
+        }
+    })
+})
 //login
 
 app.post("/login",function(req,res){
@@ -277,6 +296,7 @@ app.get("/saveLocationData/:locoNo/:locoCode",(req,res)=>{
 app.post("/createLocomotive/:locoNo",(req,res)=>{
     var locoNo=req.params.locoNo
     var locationData=req.body
+    locationData.location=[]
     dblocomotives.findOne({locomotiveNumber:locoNo},(err,daa)=>{
         if (daa==null){
             dblocomotives.insert(locationData)
