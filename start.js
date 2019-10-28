@@ -18,7 +18,7 @@ const client = new MongoClient(mongodbURL, { useNewUrlParser: true });
 
 client.connect(err => {
   dbusers = client.db("railos").collection("users");
-  
+  dbcustomers=client.db("railos").collection("customers");
   dblocomotives=client.db("railos").collection("locomotives")
   dbdashboard=client.db("railos").collection("dashboards")
   console.log("connected")
@@ -127,6 +127,22 @@ app.get("/customerdashboard",function(req,res){
 app.get("/frontdesk",function(req,res){
     if(req.session&&/^(?:frontdesk|editor|admin|ds)$/.test(req.session.role)){
         res.render("frontdesk",{role:req.session.role,firstname:req.session.firstname,lastname:req.session.lastname})
+    }
+    else res.render("401")
+})
+app.post("/newTravel",(req,res)=>{
+    var {firstname,lastname,tripData}=req.body
+    if(req.session&&/^(?:frontdesk|editor|admin|ds)$/.test(req.session.role)){
+       dbcustomers.findOne({firstname:firstname,lastname:lastname},(err,data)=>{
+            if(data==null){
+                dbcustomers.update({firstname:firstname,lastname:lastname},{$push:{trips:tripData}})
+                res.json({type:"success",message:"New travel submitted successfully"})
+            }
+            else{
+                dbcustomers.insert(req.body)
+                res.json({type:"success",message:"New travel submitted successfully"})
+            }
+       })
     }
     else res.render("401")
 })
