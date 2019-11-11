@@ -1,7 +1,7 @@
 var express=require("express")
 var app=express()
 const mongo=require('mongodb').MongoClient
-const mongodbURL = 'mongodb+srv://railosapp:mongo@railos-vkklb.mongodb.net/test?retryWrites=true';
+const mongodbURL = 'mongodb+srv://railosapp:mongo@railos-vkklb.mongodb.net/railos';
 //const mongodbURL = 'mongodb://localhost:27017/railos';
 var session=require('express-session')
 var fs=require("fs")
