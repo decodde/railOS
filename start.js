@@ -1,8 +1,8 @@
 var express=require("express")
 var app=express()
 const mongo=require('mongodb').MongoClient
-//const mongodbURL = 'mongodb+srv://railosapp:mongo@railos-vkklb.mongodb.net/test?retryWrites=true';
-const mongodbURL = 'mongodb://localhost:27017/railos';
+const mongodbURL = 'mongodb+srv://railosapp:mongo@railos-vkklb.mongodb.net/test?retryWrites=true';
+//const mongodbURL = 'mongodb://localhost:27017/railos';
 var session=require('express-session')
 var fs=require("fs")
 var path=require("path")
@@ -17,10 +17,10 @@ const MongoClient = require('mongodb').MongoClient;
 const client = new MongoClient(mongodbURL, { useNewUrlParser: true });
 
 client.connect(err => {
-  dbusers = client.db("railOS").collection("users");
+  dbusers = client.db("railos").collection("users");
   
-  dblocomotives=client.db("railOS").collection("locomotives")
-  dbdashboard=client.db("railOS").collection("dashboards")
+  dblocomotives=client.db("railos").collection("locomotives")
+  dbdashboard=client.db("railos").collection("dashboards")
   console.log("connected")
 });
   
