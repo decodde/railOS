@@ -17,10 +17,10 @@ const MongoClient = require('mongodb').MongoClient;
 const client = new MongoClient(mongodbURL, { useNewUrlParser: true });
 
 client.connect(err => {
-  dbusers = client.db("railOS").collection("users");
+  dbusers = client.db("railos").collection("users");
   
-  dblocomotives=client.db("railOS").collection("locomotives")
-  dbdashboard=client.db("railOS").collection("dashboards")
+  dblocomotives=client.db("railos").collection("locomotives")
+  dbdashboard=client.db("railos").collection("dashboards")
   console.log("connected")
 });
   
