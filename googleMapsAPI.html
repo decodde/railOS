@@ -4,34 +4,27 @@
     <title>Simple Map</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
-    <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-    </style>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css' rel='stylesheet' />
   </head>
-  <body>
-    <div id="map"></div>
-    <script defer src="./public/js/jquery.min.js" type="text/javascript"></script>
+  <div id='map' style='width: 400px; height: 300px;'></div>
     <script>
-      var map;
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.397, lng: 150.644},
-          zoom: 8
+        mapboxgl.accessToken = 'pk.eyJ1IjoicmFpbG9zIiwiYSI6ImNqeXU2cnhzMTBheTYzY21kenpxZ2txeTYifQ.HnjkbV1GL8IGXn36xDZb9Q';
+        var map = new mapboxgl.Map({
+          container: 'map',
+          style: 'mapbox://styles/mapbox/streets-v11',
+          center: [-74.50, 40], // starting position
+          zoom: 9,
+          options:{
+            maxZoom:20,
+            minZoom:15
+          }
         });
-      }
+        map.addControl(new mapboxgl.NavigationControl());
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"
-    async defer></script>
+    <script defer src="./public/js/jquery.min.js" type="text/javascript"></script>
+    
+   
     <script type="text/javascript">
         var latitudeStart=10.8493206820
         var longitudeStart=79.42402545278
@@ -54,7 +47,7 @@
                   })  
           return t.responseJSON
         }
-        loopr()
+       // loopr()
     </script>
 
   </body>

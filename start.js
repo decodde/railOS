@@ -1,8 +1,8 @@
 var express=require("express")
 var app=express()
 const mongo=require('mongodb').MongoClient
-const mongodbURL = 'mongodb+srv://railosapp:mongo@railos-vkklb.mongodb.net/test?retryWrites=true';
-//const mongodbURL = 'mongodb://localhost:27017/railos';
+//const mongodbURL = 'mongodb+srv://railosapp:mongo@railos-vkklb.mongodb.net/test?retryWrites=true';
+const mongodbURL = 'mongodb://localhost:27017/railos';
 var session=require('express-session')
 var fs=require("fs")
 var path=require("path")
@@ -64,6 +64,9 @@ app.post("/login",function(req,res){
            else res.send({string:"failed",value:false})
        }
    })
+})
+app.get("/session",(req,res)=>{
+    res.json({data:req.session})
 })
 //logout
 app.post("/logout",function(req,res){
@@ -181,6 +184,9 @@ app.get("/admin",function(req,res){
 app.get("/train-track",(req,res)=>{
     var dt=dbprocess.getSess(req)
     res.render("traintrack",dt)
+})
+app.post(`/saveLocationData/:locomotiveNumber`,(req,res)=>{
+    
 })
 ///////////////////////////////////////////////////////////////////////////////////////////
 app.get("/train-track/edit",(req,res)=>{
