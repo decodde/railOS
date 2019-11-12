@@ -55,6 +55,15 @@ app.post("/saveLocation/:id",(req,res)=>{
         }
     })
 })
+app.get("/trainData/:id",(req,res)=>{
+    dblocomotives.findOne({locomotiveNumber:req.params.id},(err,data)=>{
+        if(data==null) res.json({type:"error",msg:"Loco does  not exist"})
+        else{
+            
+            res.json({type:"success",message:"",data:data})
+        }
+    })
+})
 app.get("/lastLocation/:id",(req,res)=>{
     dblocomotives.findOne({locomotiveNumber:req.params.id},(err,data)=>{
         if(data==null) res.json({type:"error",msg:"Loco does  not exist"})
