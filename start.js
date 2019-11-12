@@ -261,7 +261,8 @@ app.post("/train-track/:locono",(req,res)=>{
 app.post("/train-track/save/dashboard",(req,res)=>{
     if(req.session.role=="admin"){
         var newDash=JSON.parse(req.body.db)
-        dbdashboard.updateOne({version:1},newDash)
+        dbdashboard.remove({version:1})
+        dbdashboard.insert(newDash)
         res.send({string:"success",value:true})
     }
     else res.send("Not authorized")
