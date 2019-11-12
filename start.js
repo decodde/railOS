@@ -18,11 +18,7 @@ const client = new MongoClient(mongodbURL, { useNewUrlParser: true });
 
 client.connect(err => {
   dbusers = client.db("railos").collection("users");
-<<<<<<< HEAD
   dbcustomers=client.db("railos").collection("customers");
-=======
-  
->>>>>>> 4670a2a5e1c2598f0449d1a470a08dd985875bb5
   dblocomotives=client.db("railos").collection("locomotives")
   dbdashboard=client.db("railos").collection("dashboards")
   console.log("connected")
