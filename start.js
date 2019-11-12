@@ -48,7 +48,7 @@ app.get("/",function(req,res){
 app.post("/saveLocation/:id",(req,res)=>{
     var newLoc=req.body
     console.log(newLoc)
-    console.log(req.query)
+    console.log(req)
     dblocomotives.findOne({locomotiveNumber:req.params.id},(err,data)=>{
         if(data==null) res.json({type:"error",msg:"Loco does  not exist"})
         else{
