@@ -45,14 +45,13 @@ app.get("/",function(req,res){
 })
 
 
-app.post("/saveLocation/:id",(req,res)=>{
-    var newLoc=req.body
-    console.log(newLoc)
-    console.log(req)
+app.post("/saveLocation/:id/:lon/:lat/:speed",(req,res)=>{
+    var {lon,lat,speed}=req.params
+    console.log(req.params)
     dblocomotives.findOne({locomotiveNumber:req.params.id},(err,data)=>{
         if(data==null) res.json({type:"error",msg:"Loco does  not exist"})
         else{
-            dblocomotives.update({locomotiveNumber:req.params.id},{$set:{lastLocation:newLoc}})
+            dblocomotives.update({locomotiveNumber:req.params.id},{$set:{lastLocation:{longitude:lon,latitude:lat,speed:speed}}})
             res.json({type:"success",message:""})
         }
     })
